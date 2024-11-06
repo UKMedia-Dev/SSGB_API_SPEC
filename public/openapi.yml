@@ -1,0 +1,465 @@
+openapi: 3.0.3
+info:
+  title: 소상톡톡 API
+  version: 0.0.1
+servers:
+  - url: https://sotalk.example.com/api/v1
+tags:
+  - name: 회원가입
+  - name: 로그인
+  - name: 게시판
+  - name: 메시지
+  - name: 마이페이지
+paths:
+  /register/mail:
+    post:
+      tags:
+        - 회원가입
+      summary: 이메일 인증 메일 전송
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: 
+                - email
+              properties:
+                email:
+                  type: string
+                  example: "test@example.com"
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /register/mail/check:
+    post:
+      tags:
+        - 회원가입
+      summary: 인증번호 확인
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - authCode
+              properties:
+                email:
+                  type: string
+                  example: "test@example.com"
+                authCode:
+                  type: string
+                  example: "445454"
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /register:
+    post:
+      tags:
+        - 회원가입
+      summary: 회원가입
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+                confirmPassword:
+                  type: string
+                agreedService:
+                  type: boolean
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /register/businessFile:
+    post:
+      tags:
+        - 회원가입
+      summary: 사업자 등록증 저장
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                businessFile:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /register/profile:
+    post:
+      tags:
+        - 회원가입
+      summary: 사용자 지역 및 업종 저장
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - regionId
+                - businessTypeId
+              properties:
+                regionId:
+                  type: integer
+                  example: 123
+                businessTypeId:
+                  type: integer
+                  example: 456
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /login:
+    post:
+      tags:
+        - 로그인
+      summary: 로그인
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: 
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  example: "test@example.com"
+                password:
+                  type: string
+                  example: "test1234!"
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+                  refreshToken:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+
+  /login/kakao:
+    post:
+      tags:
+        - 로그인
+      summary: 카카오 로그인
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+                  refreshToken:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+
+  /board:
+    get:
+      tags: 
+        - 게시판
+      summary: 목록
+      parameters: 
+        - name: boardType
+          in: query
+          description: 게시판 구분
+          required: true
+          schema:
+            type: string
+            enum:
+              - sosang
+              - saup
+        - name: page
+          in: query
+          description: 현재 페이지
+          required: true
+          schema:
+            type: integer
+        - name: size
+          in: query
+          description: 페이지 당 표시 갯수
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totalCount:
+                    type: integer
+                  contents:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        boardTypeName:
+                          type: string
+                        title:
+                          type: string
+                        content:
+                          type: string
+                        createdAt:
+                          type: string
+                        author:
+                          type: object
+                          properties:
+                            nickname:
+                              type: string
+                            profileFileId:
+                              type: integer
+                        likesCount:
+                          type: integer
+                        commentsCount:
+                          type: integer
+                        viewCount:
+                          type: integer
+                        bookmark:
+                          type: boolean
+    post:
+      tags: 
+        - 게시판
+      summary: 글쓰기
+      requestBody:
+        description: Create Board
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                boardType:
+                  $ref: '#/components/schemas/BoardType'
+                title:
+                  type: string
+                content:
+                  type: string
+                attachments:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  boardId:
+                    type: integer
+
+  /board/{boardId}:
+    get:
+      tags:
+        - 게시판
+      summary: 상세
+      parameters:
+        - name: boardId
+          in: path
+          description: 상세 아이디
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Board'
+
+  /board/{boardId}/like:
+    post:
+      tags:
+        - 게시판
+      summary: 좋아요 등록
+      parameters: 
+        - name: boardId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+    delete:
+      tags:
+        - 게시판
+      summary: 좋아요 취소
+      parameters: 
+        - name: boardId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Successful operation
+
+components:
+  schemas:
+    Board:
+      type: object
+      properties:
+        board:
+          type: object
+          properties:
+            boardType:
+              type: string
+              example: 사업 톡톡
+            boardId:
+              type: integer
+              example: 12312123
+            author:
+              type: object
+              properties:
+                nickname:
+                  type: string
+                  example: 익명의소톡
+                profileImageId:
+                  type: integer
+                  example: 354
+            createdAt:
+              type: string
+              example: 2024-11-05 17:39:00
+            title:
+              type: string
+              example: K-Start up 에서 진행하는 지원 포탈
+            content:
+              type: string
+              example: 우리 구에서는 저렴한 가격과 양질의...
+            attachments:
+              type: array
+              items:
+                type: object
+                properties:
+                  fileName:
+                    type: string
+                    example: 착한가격업소_지정_신청서.pdf
+                  fileId:
+                    type: integer
+                    example: 354
+            likesCount:
+              type: integer
+              example: 11
+            commentsCount:
+              type: integer
+              example: 2
+            viewCount:
+              type: integer
+              example: 11
+        comments:
+          type: array
+          items:
+            type: object
+            properties:
+              nickname:
+                type: string
+                example: 익명의 질문자
+              createdAt: 
+                type: string
+                example: 2024-11-05 17:47:00
+              content: 
+                type: string
+                example: 네이버에서 검색하니까 정부 24앱에서 확인하고 있음
+              attachments:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    fileName:
+                      type: string
+                      example: 착한가격업소_지정_신청서.pdf
+                    fileId:
+                      type: integer
+                      example: 354
+              likesCount:
+                type: integer
+                example: 11
+              comments:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    nickname:
+                      type: string
+                      example: 익명의 대댓글 작성자
+                    createdAt: 
+                      type: string
+                      example: 2024-11-05 17:47:00
+                    content: 
+                      type: string
+                      example: 먼데 나도 알려줘
+                    attachments:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          fileName:
+                            type: string
+                            example: 착한가격업소_지정_신청서.pdf
+                          fileId:
+                            type: integer
+                            example: 354
+                    likesCount:
+                      type: integer
+                      example: 0
+    BoardType:
+      type: string
+      enum:
+        - sosang
+        - saup
