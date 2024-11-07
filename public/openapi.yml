@@ -10,6 +10,8 @@ tags:
   - name: 게시판
   - name: 메시지
   - name: 마이페이지
+  - name: 기타
+  - name: 콤보
 paths:
   /register/mail:
     post:
@@ -132,6 +134,86 @@ paths:
                 businessTypeId:
                   type: integer
                   example: 456
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /password/mail:
+    post:
+      tags:
+        - 로그인
+      summary: 비밀번호 찾기 인증 메일 전송
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+              properties:
+                email:
+                  type: string
+                  example: "test@example.com"
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /password/mail/check:
+    post:
+      tags:
+        - 로그인
+      summary: 인증번호 확인
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - authCode
+              properties:
+                email:
+                  type: string
+                  example: "test@example.com"
+                authCode:
+                  type: string
+                  example: "445454"
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /password/reset:
+    post:
+      tags:
+        - 로그인
+      summary: 비밀번호 재설정
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - newPassword
+                - confirmPassword
+              properties:
+                newPassword:
+                  type: string
+                  example: test1234!
+                confirmPassword:
+                  type: string
+                  example: test1234!
       responses:
         '200':
           description: Successful operation
@@ -460,6 +542,389 @@ paths:
               schema:
                 $ref: '#/components/schemas/BoardBestList'
 
+  /chatRoom:
+    get:
+      tags:
+        - 메시지
+      summary: 채팅방 목록
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatRoomList'
+
+  /chatRoom/{chatRoomId}:
+    get:
+      tags:
+        - 메시지
+      summary: 채팅방 상세
+      parameters:
+        - name: chatRoomId
+          in: path
+          description: 상세 아이디
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatRoomDetail'
+
+  /chat:
+    post:
+      tags:
+        - 메시지
+      summary: 메시지 작성
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - chatRoomId
+                - userId
+              properties:
+                chatRoomId:
+                  type: integer
+                  example: 123
+                userId:
+                  type: integer
+                  example: 456
+                content:
+                  type: string
+                  example: 안녕하세요
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+    get:
+      tags:
+        - 메시지
+      summary: 최신 메시지 조회
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatList'
+
+  /myPage/profile:
+    get:
+      tags:
+        - 마이페이지
+      summary: 내 정보 상세
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+  /myPage/profile/image:
+    patch:
+      tags:
+        - 마이페이지
+      summary: 프로필 사진 변경
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                profileImage:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /myPage/profile/nickname:
+    patch:
+      tags:
+        - 마이페이지
+      summary: 닉네임 설정
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nickname:
+                  type: string
+                  example: 변경할 닉네임
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /myPage/profile/region:
+    patch:
+      tags:
+        - 마이페이지
+      summary: 활동지역 변경
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                regionId:
+                  type: integer
+                  example: 34
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /myPage/profile/businessType:
+    patch:
+      tags:
+        - 마이페이지
+      summary: 사업 분야 변경
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                businessTypeId:
+                  type: integer
+                  example: 34
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /myPage/password/mail:
+    post:
+      tags:
+        - 마이페이지
+      summary: 비밀번호 설정 인증 메일 전송
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /myPage/password/mail/check:
+    post:
+      tags:
+        - 마이페이지
+      summary: 인증번호 확인
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - authCode
+              properties:
+                authCode:
+                  type: string
+                  example: "445454"
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /myPage/password/reset:
+    post:
+      tags:
+        - 마이페이지
+      summary: 비밀번호 재설정
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - newPassword
+                - confirmPassword
+              properties:
+                newPassword:
+                  type: string
+                  example: test1234!
+                confirmPassword:
+                  type: string
+                  example: test1234!
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /myPage/bookmark:
+    get:
+      tags:
+        - 마이페이지
+      summary: 북마크 목록
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoardList'
+
+  /myPage/board:
+    get:
+      tags:
+        - 마이페이지
+      summary: 작성글 목록
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                        - board
+                        - comment
+                    title:
+                      type: string
+                      example: 근처 같이 요리공부할 사람
+                    summary:
+                      type: string
+                      example: 당황한 소톡이님이 소상톡톡에 포스팅하였습니다.
+                    createdAt:
+                      type: string
+                      example: 2024-11-07 16:30
+
+  /logout:
+    post:
+      tags:
+        - 마이페이지
+      summary: 로그아웃
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /token/refresh:
+    post:
+      tags:
+        - 기타
+      summary: 액세스 토큰 재발급
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refreshToken:
+                  type: string
+                  example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+                  refreshToken:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+
+  /user/info:
+    get:
+      tags:
+        - 기타
+      summary: 사용자 정보 조회
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+  /combo/region:
+    get:
+      tags:
+        - 콤보
+      summary: 지역 목록 콤보
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    regionId:
+                      type: integer
+                      example: 1
+                    regionName:
+                      type: string
+                      example: 서울
+
+  /combo/businessType:
+    get:
+      tags:
+        - 콤보
+      summary: 사업 종류 목록 콤보
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    businessTypeId:
+                      type: integer
+                      example: 1
+                    businessTypeName:
+                      type: string
+                      example: 제조업
+
 components:
   schemas:
     BoardDetail:
@@ -642,3 +1107,139 @@ components:
       enum:
         - sosang
         - saup
+    ChatRoomList:
+      type: array
+      items:
+        type: object
+        properties:
+          chatRoomId:
+            type: integer
+            example: 5
+          sender:
+            type: object
+            properties:
+              userId:
+                type: integer
+                example: 3
+              nickname:
+                type: string
+                example: 익명의 소톡이
+              profileImageId:
+                type: integer
+                example: 3
+          profileImageId:
+            type: integer
+            example: 123
+          lastChat:
+            type: string
+            example: 이전 대화 내용이 들어갑니다.
+          createdAt:
+            type: string
+            example: 2024-11-07 10:42:00
+    ChatRoomDetail:
+      type: object
+      properties:
+        chats:
+          type: array
+          items:
+            type: object
+            properties:
+              chatId:
+                type: integer
+                example: 2
+              content:
+                type: string
+                example: 안녕하세요! 회의 자료 보내드립니다.
+              sender:
+                type: object
+                properties:
+                  userId:
+                    type: integer
+                    example: 3
+                  nickname:
+                    type: string
+                    example: 익명의 소톡이
+                  profileImageId:
+                    type: integer
+                    example: 3
+              createdAt:
+                type: string
+                example: 2024-11-07 15:44
+              attachments:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    fileId:
+                      type: integer
+                      example: 34
+                    fileName:
+                      type: string
+                      example: 회의자료.pdf
+        totalCount:
+          type: integer
+          example: 100
+    ChatList:
+      type: array
+      items:
+        type: object
+        properties:
+          chatId:
+            type: integer
+            example: 2
+          content:
+            type: string
+            example: 안녕하세요! 회의 자료 보내드립니다.
+          sender:
+            type: object
+            properties:
+              userId:
+                type: integer
+                example: 3
+              nickname:
+                type: string
+                example: 익명의 소톡이
+              profileImageId:
+                type: integer
+                example: 3
+          createdAt:
+            type: string
+            example: 2024-11-07 15:44
+          attachments:
+            type: array
+            items:
+              type: object
+              properties:
+                fileId:
+                  type: integer
+                  example: 34
+                fileName:
+                  type: string
+                  example: 회의자료.pdf
+    User:
+      type: object
+      properties:
+        nickname:
+          type: string
+          example: 가난한 토깽이
+        nicknameGenerationRemaining:
+          type: integer
+          example: 5
+        profileIamgeId:
+          type: integer
+          example: 123
+        email:
+          type: string
+          example: test@example.com
+        regionName:
+          type: string
+          example: 서울
+        regionId:
+          type: integer
+          example: 1
+        businessTypeName:
+          type: string
+          example: 제조업
+        businessTypeId:
+          type: integer
+          example: 34
