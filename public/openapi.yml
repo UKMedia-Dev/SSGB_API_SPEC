@@ -21,7 +21,7 @@ paths:
           application/json:
             schema:
               type: object
-              required: 
+              required:
                 - email
               properties:
                 email:
@@ -150,7 +150,7 @@ paths:
           application/json:
             schema:
               type: object
-              required: 
+              required:
                 - email
                 - password
               properties:
@@ -202,19 +202,16 @@ paths:
 
   /board:
     get:
-      tags: 
+      tags:
         - 게시판
       summary: 목록
-      parameters: 
+      parameters:
         - name: boardType
           in: query
           description: 게시판 구분
           required: true
           schema:
-            type: string
-            enum:
-              - sosang
-              - saup
+            $ref: '#/components/schemas/BoardType'
         - name: page
           in: query
           description: 현재 페이지
@@ -233,40 +230,9 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  totalCount:
-                    type: integer
-                  contents:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        boardTypeName:
-                          type: string
-                        title:
-                          type: string
-                        content:
-                          type: string
-                        createdAt:
-                          type: string
-                        author:
-                          type: object
-                          properties:
-                            nickname:
-                              type: string
-                            profileFileId:
-                              type: integer
-                        likesCount:
-                          type: integer
-                        commentsCount:
-                          type: integer
-                        viewCount:
-                          type: integer
-                        bookmark:
-                          type: boolean
+                $ref: '#/components/schemas/BoardList'
     post:
-      tags: 
+      tags:
         - 게시판
       summary: 글쓰기
       requestBody:
@@ -316,14 +282,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Board'
+                $ref: '#/components/schemas/BoardDetail'
 
   /board/{boardId}/like:
     post:
       tags:
         - 게시판
       summary: 좋아요 등록
-      parameters: 
+      parameters:
         - name: boardId
           in: path
           required: true
@@ -340,7 +306,7 @@ paths:
       tags:
         - 게시판
       summary: 좋아요 취소
-      parameters: 
+      parameters:
         - name: boardId
           in: path
           required: true
@@ -350,9 +316,153 @@ paths:
         "204":
           description: Successful operation
 
+  /board/{boardId}/bookmark:
+    post:
+      tags:
+        - 게시판
+      summary: 북마크 등록
+      parameters:
+        - name: boardId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+    delete:
+      tags:
+        - 게시판
+      summary: 북마크 취소
+      parameters:
+        - name: boardId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Successful operation
+
+  /comment:
+    post:
+      tags:
+        - 게시판
+      summary: 댓글 쓰기
+      requestBody:
+        description: Create comments
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                boardId:
+                  type: integer
+                content:
+                  type: string
+                attachments:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  boardId:
+                    type: integer
+
+  /comment/{commentId}/like:
+    post:
+      tags:
+        - 게시판
+      summary: 댓글 좋아요 등록
+      parameters:
+        - name: commentId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+    delete:
+      tags:
+        - 게시판
+      summary: 댓글 좋아요 취소
+      parameters:
+        - name: commentId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Successful operation
+
+  /comment/{commentId}/comment:
+    post:
+      tags:
+        - 게시판
+      summary: 대댓글 쓰기
+      parameters:
+        - name: commentId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                attachments:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  boardId:
+                    type: integer
+
+  /board/best:
+    get:
+      tags:
+        - 게시판
+      summary: 인기글 목록
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoardBestList'
+
 components:
   schemas:
-    Board:
+    BoardDetail:
       type: object
       properties:
         board:
@@ -410,10 +520,10 @@ components:
               nickname:
                 type: string
                 example: 익명의 질문자
-              createdAt: 
+              createdAt:
                 type: string
                 example: 2024-11-05 17:47:00
-              content: 
+              content:
                 type: string
                 example: 네이버에서 검색하니까 정부 24앱에서 확인하고 있음
               attachments:
@@ -438,10 +548,10 @@ components:
                     nickname:
                       type: string
                       example: 익명의 대댓글 작성자
-                    createdAt: 
+                    createdAt:
                       type: string
                       example: 2024-11-05 17:47:00
-                    content: 
+                    content:
                       type: string
                       example: 먼데 나도 알려줘
                     attachments:
@@ -458,6 +568,75 @@ components:
                     likesCount:
                       type: integer
                       example: 0
+    BoardList:
+      type: object
+      properties:
+        totalCount:
+          type: integer
+          example: 1
+        contents:
+          type: array
+          items:
+            type: object
+            properties:
+              boardTypeName:
+                type: string
+                example: 사업톡톡
+              title:
+                type: string
+                example: 사업하는거 너무 힘드네요
+              content:
+                type: string
+                example: 사업 다들 어떻게 하시나요?
+              createdAt:
+                type: string
+                example: 2024-11-07 10:42:00
+              author:
+                type: object
+                properties:
+                  nickname:
+                    type: string
+                    example: 익명의소톡
+                  profileFileId:
+                    type: integer
+                    example: 354
+              likesCount:
+                type: integer
+                example: 11
+              commentsCount:
+                type: integer
+                example: 3
+              viewCount:
+                type: integer
+                example: 20
+              bookmark:
+                type: boolean
+    BoardBestList:
+      type: object
+      properties:
+        contents:
+          type: array
+          items:
+            type: object
+            properties:
+              boardTypeName:
+                type: string
+                example: 사업톡톡
+              title:
+                type: string
+                example: 주요 업데이트된 기능 안내
+              createdAt:
+                type: string
+                example: 2024-11-05 17:39:00
+              author:
+                type: object
+                properties:
+                  nickname:
+                    type: string
+                    example: 익명의소톡
+                  profileFileId:
+                    type: integer
+                    example: 354
     BoardType:
       type: string
       enum:
