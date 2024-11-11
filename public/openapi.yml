@@ -582,22 +582,23 @@ paths:
       summary: 메시지 작성
       requestBody:
         content:
-          application/json:
+          multipart/form-data:
             schema:
               type: object
               required:
                 - chatRoomId
-                - userId
               properties:
                 chatRoomId:
                   type: integer
                   example: 123
-                userId:
-                  type: integer
-                  example: 456
                 content:
                   type: string
                   example: 안녕하세요
+                attachments:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
       responses:
         '201':
           description: Successful operation
