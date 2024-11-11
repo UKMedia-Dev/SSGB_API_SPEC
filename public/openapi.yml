@@ -817,7 +817,7 @@ paths:
                   },
                   {
                     type: comment,
-                    title: 시간되면 나도 같이 참여하고싶은데 언제 생각하고있어? 나도 같이 할래 ! 시간결정되면 나도 알려주면 좋..,
+                    title: '시간되면 나도 같이 참여하고싶은데 언제 생각하고있어? 나도 같이 할래 ! 시간결정되면 나도 알려주면 좋..',
                     summary: 소상톡톡에 등록된 근처 같이 요리공부할 사람 게시글에 댓글을 남겼습니다.,
                     createdAt: 2024-11-07 16:30,
                   }
@@ -1072,6 +1072,8 @@ components:
             likesCount:
               type: integer
               example: 11
+            like:
+              type: boolean
             commentsCount:
               type: integer
               example: 2
@@ -1097,6 +1099,7 @@ components:
                 }
               ],
               likesCount: 11,
+              like: true,
               comments: [
                 {
                   commentId: 6578,
@@ -1114,6 +1117,7 @@ components:
                     }
                   ],
                   likesCount: 1,
+                  like: true,
                 },
                 {
                   commentId: 6588,
@@ -1122,6 +1126,7 @@ components:
                   content: 나도나도~~,
                   attachments: [],
                   likesCount: 0,
+                  like: true,
                 }
               ],
             }
@@ -1200,6 +1205,7 @@ components:
                 profileFileId: 21,
               },
               likesCount: 540,
+              like: true,
               commentsCount: 34,
               viewCount: 8463,
               bookmark: true,
@@ -1208,13 +1214,14 @@ components:
               boardId: 566,
               boardTypeName: 소상톡톡,
               title: 사업하는거 너무 힘드네요,
-              content: 사업 다들 어떻게 하시나요?,
+              content: '사업 다들 어떻게 하시나요?',
               createdAt: 2024-11-07 10:42:00,
               author: {
                 nickname: 익명의소톡,
                 profileFileId: 354,
               },
               likesCount: 11,
+              like: true,
               commentsCount: 3,
               viewCount: 20,
               bookmark: true,
