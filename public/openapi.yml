@@ -317,11 +317,11 @@ paths:
                         author:
                           nickname: "소통장"
                           profileFileId: 21
-                        likesCount: 540,
-                        like: true,
-                        commentsCount: 34,
-                        viewCount: 8463,
-                        bookmark: true,
+                        likesCount: 540
+                        like: true
+                        commentsCount: 34
+                        viewCount: 8463
+                        bookmark: true
                       - boardId: 2
                         boardTypeName: "소상톡톡"
                         title: "사업하는거 너무 힘드네요"
@@ -712,7 +712,7 @@ paths:
                 empty:
                   value:
                     totalCount: 0
-                    chatRooms: []
+                    chatRooms: [ ]
                 one:
                   value:
                     totalCount: 1
@@ -920,15 +920,14 @@ paths:
                           - fileId: 2
                             fileName: "회의자료.pdf"
 
-  # TODO 리팩토링
   /myPage/profile:
     get:
       tags:
         - 마이페이지
       summary: 내 정보 상세
       responses:
-        '200':
-          description: successful operation
+        200:
+          description: OK
           content:
             application/json:
               schema:
@@ -949,12 +948,16 @@ paths:
                   type: string
                   format: binary
       responses:
-        '200':
-          description: Successful operation
+        200:
+          description: OK
           content:
             application/json:
               schema:
                 type: object
+                properties:
+                  profileImageId:
+                    type: integer
+                    example: 1
 
   /myPage/profile/nickname:
     patch:
@@ -969,14 +972,10 @@ paths:
               properties:
                 nickname:
                   type: string
-                  example: 변경할 닉네임
+                  example: "익명의 소톡소톡이"
       responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: object
+        200:
+          $ref: '#/components/responses/OK'
 
   /myPage/profile/region:
     patch:
@@ -993,12 +992,8 @@ paths:
                   type: integer
                   example: 34
       responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: object
+        200:
+          $ref: '#/components/responses/OK'
 
   /myPage/profile/businessType:
     patch:
@@ -1015,12 +1010,8 @@ paths:
                   type: integer
                   example: 34
       responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: object
+        200:
+          $ref: '#/components/responses/OK'
 
   /myPage/password/mail:
     post:
@@ -1028,12 +1019,8 @@ paths:
         - 마이페이지
       summary: 비밀번호 설정 인증 메일 전송
       responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: object
+        200:
+          $ref: '#/components/responses/OK'
 
   /myPage/password/mail/check:
     post:
@@ -1052,12 +1039,8 @@ paths:
                   type: string
                   example: "445454"
       responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: object
+        200:
+          $ref: '#/components/responses/OK'
 
   /myPage/password/reset:
     post:
@@ -1075,17 +1058,13 @@ paths:
               properties:
                 newPassword:
                   type: string
-                  example: test1234!
+                  example: "test1234!"
                 confirmPassword:
                   type: string
-                  example: test1234!
+                  example: "test1234!"
       responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: object
+        200:
+          $ref: '#/components/responses/OK'
 
   /myPage/bookmark:
     get:
@@ -1093,12 +1072,116 @@ paths:
         - 마이페이지
       summary: 북마크 목록
       responses:
-        '200':
-          description: successful operation
+        200:
+          description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BoardList'
+              examples:
+                empty:
+                  value:
+                    totalCount: 0
+                    contents: [ ]
+                two:
+                  value:
+                    totalCount: 2
+                    contents:
+                      - boardId: 1
+                        boardTypeName: "사업톡톡"
+                        title: "지원을 알아봅시다"
+                        content: "다양한 소상공인 지원에 대해서 알아보아요~"
+                        createdAt: "2024-11-01 18:45:00"
+                        author:
+                          nickname: "소통장"
+                          profileFileId: 21
+                        likesCount: 540
+                        like: true
+                        commentsCount: 34
+                        viewCount: 8463
+                        bookmark: true
+                      - boardId: 2
+                        boardTypeName: "소상톡톡"
+                        title: "사업하는거 너무 힘드네요"
+                        content: "사업 다들 어떻게 하시나요?"
+                        createdAt: "2024-11-07 10:42:00"
+                        author:
+                          nickname: "익명의소톡"
+                          profileFileId: 354
+                        likesCount: 11
+                        like: true
+                        commentsCount: 3
+                        viewCount: 20
+                        bookmark: true
+                many:
+                  value:
+                    totalCount: 5
+                    contents:
+                      - boardId: 1
+                        boardTypeName: "사업톡톡"
+                        title: "지원을 알아봅시다"
+                        content: "다양한 소상공인 지원에 대해서 알아보아요~"
+                        createdAt: "2024-11-01 18:45:00"
+                        author:
+                          nickname: "소통장"
+                          profileFileId: 21
+                        likesCount: 540
+                        like: true
+                        commentsCount: 34
+                        viewCount: 8463
+                        bookmark: true
+                      - boardId: 2
+                        boardTypeName: "소상톡톡"
+                        title: "사업하는거 너무 힘드네요"
+                        content: "사업 다들 어떻게 하시나요?"
+                        createdAt: "2024-11-07 10:42:00"
+                        author:
+                          nickname: "익명의소톡"
+                          profileFileId: 354
+                        likesCount: 11
+                        like: true
+                        commentsCount: 3
+                        viewCount: 20
+                        bookmark: true
+                      - boardId: 3
+                        boardTypeName: "소상톡톡"
+                        title: "사업하는거 너무 힘드네요"
+                        content: "사업 다들 어떻게 하시나요?"
+                        createdAt: "2024-11-07 10:42:00"
+                        author:
+                          nickname: "익명의소톡"
+                          profileFileId: 354
+                        likesCount: 11
+                        like: true
+                        commentsCount: 3
+                        viewCount: 20
+                        bookmark: true
+                      - boardId: 4
+                        boardTypeName: "소상톡톡"
+                        title: "사업하는거 너무 힘드네요"
+                        content: "사업 다들 어떻게 하시나요?"
+                        createdAt: "2024-11-07 10:42:00"
+                        author:
+                          nickname: "익명의소톡"
+                          profileFileId: 354
+                        likesCount: 11
+                        like: true
+                        commentsCount: 3
+                        viewCount: 20
+                        bookmark: true
+                      - boardId: 5
+                        boardTypeName: "사업톡톡"
+                        title: "지원을 알아봅시다"
+                        content: "다양한 소상공인 지원에 대해서 알아보아요~"
+                        createdAt: "2024-11-01 18:45:00"
+                        author:
+                          nickname: "소통장"
+                          profileFileId: 21
+                        likesCount: 540
+                        like: true
+                        commentsCount: 34
+                        viewCount: 8463
+                        bookmark: true
 
   /myPage/board:
     get:
@@ -1106,57 +1189,111 @@ paths:
         - 마이페이지
       summary: 작성글 목록
       responses:
-        '200':
-          description: successful operation
+        200:
+          description: OK
           content:
             application/json:
               schema:
-                type: array
-                example: [
-                  {
-                    type: board,
-                    title: 근처 같이 요리공부할 사람,
-                    summary: 당황한 소톡이님이 소상톡톡에 포스팅하였습니다.,
-                    createdAt: 2024-11-07 16:30,
-                  },
-                  {
-                    type: comment,
-                    title: '시간되면 나도 같이 참여하고싶은데 언제 생각하고있어? 나도 같이 할래 ! 시간결정되면 나도 알려주면 좋..',
-                    summary: 소상톡톡에 등록된 근처 같이 요리공부할 사람 게시글에 댓글을 남겼습니다.,
-                    createdAt: 2024-11-07 16:30,
-                  }
-                ]
-                # example 에서 enum 을 표현할 방법이 없음.
-                # items:
-                #   type: object
-                #   properties:
-                #     type:
-                #       type: string
-                #       enum:
-                #         - board
-                #         - comment
-                #     title:
-                #       type: string
-                #       example: 근처 같이 요리공부할 사람
-                #     summary:
-                #       type: string
-                #       example: 당황한 소톡이님이 소상톡톡에 포스팅하였습니다.
-                #     createdAt:
-                #       type: string
-                #       example: 2024-11-07 16:30
-
+                type: object
+                properties:
+                  totalCount:
+                    type: integer
+                    example: 1
+                  boards:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        boardId:
+                          type: integer
+                          example: 1
+                        type:
+                          type: string
+                          enum:
+                            - board
+                            - comment
+                        boardTypeName:
+                          type: string
+                          example: "소상톡톡"
+                        title:
+                          type: string
+                          example: "근처 같이 요리공부할 사람"
+                        content:
+                          type: string
+                          example: "시간되면 나도 같이 참여하고 싶은데..."
+                        createdAt:
+                          type: string
+                          example: "2024-11-07 16:30"
+              examples:
+                empty:
+                  value:
+                    totalCount: 0
+                    boards: [ ]
+                two:
+                  value:
+                    totalCount: 2
+                    boards:
+                      - boardId: 2
+                        type: "board"
+                        boardTypeName: "소상톡톡"
+                        title: "근처 같이 요리공부할 사람"
+                        content: ""
+                        nickname: "익명의 소톡이"
+                        createdAt: "2024-11-08 16:30"
+                      - boardId: 1
+                        type: "comment"
+                        boardTypeName: "사업톡톡"
+                        title: "근처 같이 요리공부할 사람"
+                        content: "간되면 나도 같이 참여하고 싶은데..."
+                        nickname: "익명의 소톡이"
+                        createdAt: "2024-11-07 16:30"
+                many:
+                  value:
+                    totalCount: 5
+                    boards:
+                      - boardId: 5
+                        type: "board"
+                        boardTypeName: "소상톡톡"
+                        title: "근처 같이 요리공부할 사람"
+                        content: ""
+                        nickname: "익명의 소톡이"
+                        createdAt: "2024-11-08 16:30"
+                      - boardId: 4
+                        type: "board"
+                        boardTypeName: "소상톡톡"
+                        title: "근처 같이 요리공부할 사람"
+                        content: ""
+                        nickname: "익명의 소톡이"
+                        createdAt: "2024-11-08 16:30"
+                      - boardId: 3
+                        type: "comment"
+                        boardTypeName: "사업톡톡"
+                        title: "근처 같이 요리공부할 사람"
+                        content: "간되면 나도 같이 참여하고 싶은데..."
+                        nickname: "익명의 소톡이"
+                        createdAt: "2024-11-07 16:30"
+                      - boardId: 2
+                        type: "board"
+                        boardTypeName: "소상톡톡"
+                        title: "근처 같이 요리공부할 사람"
+                        content: ""
+                        nickname: "익명의 소톡이"
+                        createdAt: "2024-11-08 16:30"
+                      - boardId: 1
+                        type: "comment"
+                        boardTypeName: "사업톡톡"
+                        title: "근처 같이 요리공부할 사람"
+                        content: "간되면 나도 같이 참여하고 싶은데..."
+                        nickname: "익명의 소톡이"
+                        createdAt: "2024-11-07 16:30"
   /logout:
     post:
       tags:
         - 마이페이지
       summary: 로그아웃
       responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: object
+        200:
+          $ref: '#/components/responses/OK'
 
   /token/refresh:
     post:
@@ -1171,21 +1308,14 @@ paths:
               properties:
                 refreshToken:
                   type: string
-                  example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+                  example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
       responses:
-        '200':
-          description: Successful operation
+        200:
+          description: OK
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  accessToken:
-                    type: string
-                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
-                  refreshToken:
-                    type: string
-                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+                $ref: '#/components/schemas/Tokens'
 
   /user/info:
     get:
@@ -1193,8 +1323,8 @@ paths:
         - 기타
       summary: 사용자 정보 조회
       responses:
-        '200':
-          description: successful operation
+        200:
+          description: OK
           content:
             application/json:
               schema:
@@ -1206,87 +1336,36 @@ paths:
         - 콤보
       summary: 지역 목록 콤보
       responses:
-        '200':
-          description: successful operation
+        200:
+          description: OK
           content:
             application/json:
               schema:
-                type: array
-                example: [
-                  {
-                    regionId: 1,
-                    regionName: 서울,
-                  },
-                  {
-                    regionId: 2,
-                    regionName: 경기,
-                  },
-                  {
-                    regionId: 3,
-                    regionName: 인천,
-                  },
-                  {
-                    regionId: 4,
-                    regionName: 강원,
-                  },
-                  {
-                    regionId: 5,
-                    regionName: 충북,
-                  },
-                  {
-                    regionId: 6,
-                    regionName: 충남,
-                  },
-                  {
-                    regionId: 7,
-                    regionName: 대전,
-                  },
-                  {
-                    regionId: 8,
-                    regionName: 전북,
-                  },
-                  {
-                    regionId: 9,
-                    regionName: 전남,
-                  },
-                  {
-                    regionId: 10,
-                    regionName: 광주,
-                  },
-                  {
-                    regionId: 11,
-                    regionName: 경북,
-                  },
-                  {
-                    regionId: 12,
-                    regionName: 경남,
-                  },
-                  {
-                    regionId: 13,
-                    regionName: 대구,
-                  },
-                  {
-                    regionId: 14,
-                    regionName: 울산,
-                  },
-                  {
-                    regionId: 15,
-                    regionName: 부산,
-                  },
-                  {
-                    regionId: 16,
-                    regionName: 제주,
-                  }
-                ]
-                # items:
-                #   type: object
-                #   properties:
-                #     regionId:
-                #       type: integer
-                #       example: 1
-                #     regionName:
-                #       type: string
-                #       example: 서울
+                type: object
+                properties:
+                  regions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        regionId:
+                          type: integer
+                          example: 1
+                        regionName:
+                          type: string
+                          example: "서울"
+                example:
+                  regions:
+                    - regionId: 1
+                      regionName: "서울"
+                    - regionId: 2
+                      regionName: "경기"
+                    - regionId: 3
+                      regionName: "인천"
+                    - regionId: 4
+                      regionName: "강원"
+                    - regionId: 5
+                      regionName: "충북"
 
   /combo/businessType:
     get:
@@ -1294,31 +1373,30 @@ paths:
         - 콤보
       summary: 사업 종류 목록 콤보
       responses:
-        '200':
-          description: successful operation
+        200:
+          description: OK
           content:
             application/json:
               schema:
-                type: array
-                example: [
-                  {
-                    businessTypeId: 1,
-                    businessTypeName: 제조업,
-                  },
-                  {
-                    businessTypeId: 2,
-                    businessTypeName: 서비스업,
-                  }
-                ]
-                # items:
-                #   type: object
-                #   properties:
-                #     businessTypeId:
-                #       type: integer
-                #       example: 1
-                #     businessTypeName:
-                #       type: string
-                #       example: 제조업
+                type: object
+                properties:
+                  businessTypes:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        businessTypeId:
+                          type: integer
+                          example: 1
+                        businessTypeName:
+                          type: string
+                          example: "제조업"
+                example:
+                  businessTypes:
+                    - businessTypeId: 1
+                      businessTypeName: "제조업"
+                    - businessTypeId: 2
+                      businessTypeName: "서비스업"
 
 components:
   schemas:
@@ -1642,6 +1720,15 @@ components:
         businessTypeId:
           type: integer
           example: 34
+    Tokens:
+      type: object
+      properties:
+        accessToken:
+          type: string
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
+        refreshToken:
+          type: string
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
     Error:
       type: object
       properties:
