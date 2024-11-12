@@ -12,12 +12,16 @@ tags:
   - name: 마이페이지
   - name: 기타
   - name: 콤보
+# TODO 보안 적용
+#security:
+#  - bearerAuth: [ ]
 paths:
   /register/mail:
     post:
       tags:
         - 회원가입
       summary: 이메일 인증 메일 전송
+      security: [ ]
       requestBody:
         content:
           application/json:
@@ -30,18 +34,15 @@ paths:
                   type: string
                   example: "test@example.com"
       responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: object
+        200:
+          $ref: '#/components/responses/OK'
 
   /register/mail/check:
     post:
       tags:
         - 회원가입
       summary: 인증번호 확인
+      security: [ ]
       requestBody:
         content:
           application/json:
@@ -58,18 +59,15 @@ paths:
                   type: string
                   example: "445454"
       responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: object
+        200:
+          $ref: '#/components/responses/OK'
 
   /register:
     post:
       tags:
         - 회원가입
       summary: 회원가입
+      security: [ ]
       requestBody:
         content:
           application/json:
@@ -78,19 +76,18 @@ paths:
               properties:
                 email:
                   type: string
+                  example: "test@example.com"
                 password:
                   type: string
+                  example: "test1234!"
                 confirmPassword:
                   type: string
+                  example: "test1234!"
                 agreedService:
                   type: boolean
       responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: object
+        200:
+          $ref: '#/components/responses/OK'
 
   /register/businessFile:
     post:
@@ -107,12 +104,8 @@ paths:
                   type: string
                   format: binary
       responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: object
+        200:
+          $ref: '#/components/responses/OK'
 
   /register/profile:
     post:
@@ -130,23 +123,20 @@ paths:
               properties:
                 regionId:
                   type: integer
-                  example: 123
+                  example: 1
                 businessTypeId:
                   type: integer
-                  example: 456
+                  example: 1
       responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: object
+        200:
+          $ref: '#/components/responses/OK'
 
   /password/mail:
     post:
       tags:
         - 로그인
       summary: 비밀번호 찾기 인증 메일 전송
+      security: [ ]
       requestBody:
         content:
           application/json:
@@ -159,18 +149,15 @@ paths:
                   type: string
                   example: "test@example.com"
       responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: object
+        200:
+          $ref: '#/components/responses/OK'
 
   /password/mail/check:
     post:
       tags:
         - 로그인
       summary: 인증번호 확인
+      security: [ ]
       requestBody:
         content:
           application/json:
@@ -187,46 +174,44 @@ paths:
                   type: string
                   example: "445454"
       responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: object
+        200:
+          $ref: '#/components/responses/OK'
 
   /password/reset:
     post:
       tags:
         - 로그인
       summary: 비밀번호 재설정
+      security: [ ]
       requestBody:
         content:
           application/json:
             schema:
               type: object
               required:
+                - email
                 - newPassword
                 - confirmPassword
               properties:
+                email:
+                  type: string
+                  example: "test@example.com"
                 newPassword:
                   type: string
-                  example: test1234!
+                  example: "test1234!"
                 confirmPassword:
                   type: string
-                  example: test1234!
+                  example: "test1234!"
       responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: object
+        200:
+          $ref: '#/components/responses/OK'
 
   /login:
     post:
       tags:
         - 로그인
       summary: 로그인
+      security: [ ]
       requestBody:
         content:
           application/json:
@@ -244,7 +229,7 @@ paths:
                   example: "test1234!"
       responses:
         '200':
-          description: Successful operation
+          description: OK
           content:
             application/json:
               schema:
@@ -252,24 +237,25 @@ paths:
                 properties:
                   accessToken:
                     type: string
-                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
                   refreshToken:
                     type: string
-                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
 
   /login/kakao:
     post:
       tags:
         - 로그인
       summary: 카카오 로그인
+      security: [ ]
       requestBody:
         content:
           application/json:
             schema:
               type: object
       responses:
-        '200':
-          description: Successful operation
+        200:
+          description: OK
           content:
             application/json:
               schema:
@@ -277,16 +263,17 @@ paths:
                 properties:
                   accessToken:
                     type: string
-                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
                   refreshToken:
                     type: string
-                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
 
   /board:
     get:
       tags:
         - 게시판
       summary: 목록
+      security: [ ]
       parameters:
         - name: boardType
           in: query
@@ -307,18 +294,121 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
-          description: successful operation
+        200:
+          description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BoardList'
+              examples:
+                empty:
+                  value:
+                    totalCount: 0
+                    contents: [ ]
+                two:
+                  value:
+                    totalCount: 2
+                    contents:
+                      - boardId: 1
+                        boardTypeName: "사업톡톡"
+                        title: "지원을 알아봅시다"
+                        content: "다양한 소상공인 지원에 대해서 알아보아요~"
+                        createdAt: "2024-11-01 18:45:00"
+                        author:
+                          nickname: "소통장"
+                          profileFileId: 21
+                        likesCount: 540,
+                        like: true,
+                        commentsCount: 34,
+                        viewCount: 8463,
+                        bookmark: true,
+                      - boardId: 2
+                        boardTypeName: "소상톡톡"
+                        title: "사업하는거 너무 힘드네요"
+                        content: "사업 다들 어떻게 하시나요?"
+                        createdAt: "2024-11-07 10:42:00"
+                        author:
+                          nickname: "익명의소톡"
+                          profileFileId: 354
+                        likesCount: 11
+                        like: true
+                        commentsCount: 3
+                        viewCount: 20
+                        bookmark: true
+                many:
+                  value:
+                    totalCount: 5
+                    contents:
+                      - boardId: 1
+                        boardTypeName: "사업톡톡"
+                        title: "지원을 알아봅시다"
+                        content: "다양한 소상공인 지원에 대해서 알아보아요~"
+                        createdAt: "2024-11-01 18:45:00"
+                        author:
+                          nickname: "소통장"
+                          profileFileId: 21
+                        likesCount: 540
+                        like: true
+                        commentsCount: 34
+                        viewCount: 8463
+                        bookmark: true
+                      - boardId: 2
+                        boardTypeName: "소상톡톡"
+                        title: "사업하는거 너무 힘드네요"
+                        content: "사업 다들 어떻게 하시나요?"
+                        createdAt: "2024-11-07 10:42:00"
+                        author:
+                          nickname: "익명의소톡"
+                          profileFileId: 354
+                        likesCount: 11
+                        like: true
+                        commentsCount: 3
+                        viewCount: 20
+                        bookmark: true
+                      - boardId: 3
+                        boardTypeName: "소상톡톡"
+                        title: "사업하는거 너무 힘드네요"
+                        content: "사업 다들 어떻게 하시나요?"
+                        createdAt: "2024-11-07 10:42:00"
+                        author:
+                          nickname: "익명의소톡"
+                          profileFileId: 354
+                        likesCount: 11
+                        like: true
+                        commentsCount: 3
+                        viewCount: 20
+                        bookmark: true
+                      - boardId: 4
+                        boardTypeName: "소상톡톡"
+                        title: "사업하는거 너무 힘드네요"
+                        content: "사업 다들 어떻게 하시나요?"
+                        createdAt: "2024-11-07 10:42:00"
+                        author:
+                          nickname: "익명의소톡"
+                          profileFileId: 354
+                        likesCount: 11
+                        like: true
+                        commentsCount: 3
+                        viewCount: 20
+                        bookmark: true
+                      - boardId: 5
+                        boardTypeName: "사업톡톡"
+                        title: "지원을 알아봅시다"
+                        content: "다양한 소상공인 지원에 대해서 알아보아요~"
+                        createdAt: "2024-11-01 18:45:00"
+                        author:
+                          nickname: "소통장"
+                          profileFileId: 21
+                        likesCount: 540
+                        like: true
+                        commentsCount: 34
+                        viewCount: 8463
+                        bookmark: true
     post:
       tags:
         - 게시판
       summary: 글쓰기
       requestBody:
-        description: Create Board
         content:
           multipart/form-data:
             schema:
@@ -328,16 +418,18 @@ paths:
                   $ref: '#/components/schemas/BoardType'
                 title:
                   type: string
+                  example: "익명의 소톡 모여라~"
                 content:
                   type: string
+                  example: "고민들을 댓글로 적어주세요~"
                 attachments:
                   type: array
                   items:
                     type: string
                     format: binary
       responses:
-        '200':
-          description: Successful operation
+        200:
+          description: OK
           content:
             application/json:
               schema:
@@ -345,12 +437,14 @@ paths:
                 properties:
                   boardId:
                     type: integer
+                    example: 1
 
   /board/{boardId}:
     get:
       tags:
         - 게시판
       summary: 상세
+      security: [ ]
       parameters:
         - name: boardId
           in: path
@@ -359,8 +453,8 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
-          description: successful operation
+        200:
+          description: OK
           content:
             application/json:
               schema:
@@ -378,12 +472,8 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: object
+        200:
+          $ref: '#/components/responses/OK'
     delete:
       tags:
         - 게시판
@@ -395,8 +485,8 @@ paths:
           schema:
             type: integer
       responses:
-        "204":
-          description: Successful operation
+        200:
+          $ref: '#/components/responses/OK'
 
   /board/{boardId}/bookmark:
     post:
@@ -410,12 +500,8 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: object
+        200:
+          $ref: '#/components/responses/OK'
     delete:
       tags:
         - 게시판
@@ -427,8 +513,8 @@ paths:
           schema:
             type: integer
       responses:
-        "204":
-          description: Successful operation
+        200:
+          $ref: '#/components/responses/OK'
 
   /comment:
     post:
@@ -436,7 +522,6 @@ paths:
         - 게시판
       summary: 댓글 쓰기
       requestBody:
-        description: Create comments
         content:
           multipart/form-data:
             schema:
@@ -444,23 +529,26 @@ paths:
               properties:
                 boardId:
                   type: integer
+                  example: 1
                 content:
                   type: string
+                  example: '댓글 이렇게 쓰는거 맞나용'
                 attachments:
                   type: array
                   items:
                     type: string
                     format: binary
       responses:
-        '200':
-          description: Successful operation
+        200:
+          description: OK
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  boardId:
+                  commentId:
                     type: integer
+                    example: 1
 
   /comment/{commentId}/like:
     post:
@@ -474,12 +562,8 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: object
+        200:
+          $ref: '#/components/responses/OK'
     delete:
       tags:
         - 게시판
@@ -491,8 +575,8 @@ paths:
           schema:
             type: integer
       responses:
-        "204":
-          description: Successful operation
+        200:
+          $ref: '#/components/responses/OK'
 
   /comment/{commentId}/comment:
     post:
@@ -519,28 +603,98 @@ paths:
                     type: string
                     format: binary
       responses:
-        '200':
-          description: Successful operation
+        200:
+          description: OK
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  boardId:
+                  commentId:
                     type: integer
+                    example: 2
 
   /board/best:
     get:
       tags:
         - 게시판
       summary: 인기글 목록
+      security: [ ]
       responses:
-        '200':
-          description: successful operation
+        200:
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BoardBestList'
+                $ref: '#/components/schemas/BoardList'
+              example:
+                totalCount: 5
+                contents:
+                  - boardId: 1
+                    boardTypeName: "사업톡톡"
+                    title: "지원을 알아봅시다"
+                    content: "다양한 소상공인 지원에 대해서 알아보아요~"
+                    createdAt: "2024-11-01 18:45:00"
+                    author:
+                      nickname: "소통장"
+                      profileFileId: 21
+                    likesCount: 540
+                    like: true
+                    commentsCount: 34
+                    viewCount: 8463
+                    bookmark: true
+                  - boardId: 2
+                    boardTypeName: "소상톡톡"
+                    title: "사업하는거 너무 힘드네요"
+                    content: "사업 다들 어떻게 하시나요?"
+                    createdAt: "2024-11-07 10:42:00"
+                    author:
+                      nickname: "익명의소톡"
+                      profileFileId: 354
+                    likesCount: 11
+                    like: true
+                    commentsCount: 3
+                    viewCount: 20
+                    bookmark: true
+                  - boardId: 3
+                    boardTypeName: "소상톡톡"
+                    title: "사업하는거 너무 힘드네요"
+                    content: "사업 다들 어떻게 하시나요?"
+                    createdAt: "2024-11-07 10:42:00"
+                    author:
+                      nickname: "익명의소톡"
+                      profileFileId: 354
+                    likesCount: 11
+                    like: true
+                    commentsCount: 3
+                    viewCount: 20
+                    bookmark: true
+                  - boardId: 4
+                    boardTypeName: "소상톡톡"
+                    title: "사업하는거 너무 힘드네요"
+                    content: "사업 다들 어떻게 하시나요?"
+                    createdAt: "2024-11-07 10:42:00"
+                    author:
+                      nickname: "익명의소톡"
+                      profileFileId: 354
+                    likesCount: 11
+                    like: true
+                    commentsCount: 3
+                    viewCount: 20
+                    bookmark: true
+                  - boardId: 5
+                    boardTypeName: "사업톡톡"
+                    title: "지원을 알아봅시다"
+                    content: "다양한 소상공인 지원에 대해서 알아보아요~"
+                    createdAt: "2024-11-01 18:45:00"
+                    author:
+                      nickname: "소통장"
+                      profileFileId: 21
+                    likesCount: 540
+                    like: true
+                    commentsCount: 34
+                    viewCount: 8463
+                    bookmark: true
 
   /chatRoom:
     get:
@@ -548,12 +702,67 @@ paths:
         - 메시지
       summary: 채팅방 목록
       responses:
-        '200':
-          description: successful operation
+        200:
+          description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ChatRoomList'
+              examples:
+                empty:
+                  value: [ ]
+                one:
+                  value:
+                    - chatRoomId: 1
+                      sender:
+                        userId: 1
+                        nickname: "익명의 소톡이"
+                        profileImageId: 3
+                      profileImageId: 4
+                      lastChat: "이전 대화 내용이 들어갑니다."
+                      createdAt: "2024-11-07 10:42:00"
+                many:
+                  value:
+                    - chatRoomId: 1
+                      sender:
+                        userId: 1
+                        nickname: "익명의 소톡이"
+                        profileImageId: 3
+                      profileImageId: 4
+                      lastChat: "이전 대화 내용이 들어갑니다."
+                      createdAt: "2024-11-07 10:42:00"
+                    - chatRoomId: 2
+                      sender:
+                        userId: 2
+                        nickname: "무너진 마음이"
+                        profileImageId: 4
+                      profileImageId: 5
+                      lastChat: "이전 대화 내용이 들어갑니다."
+                      createdAt: "2024-11-05 10:42:00"
+                    - chatRoomId: 3
+                      sender:
+                        userId: 3
+                        nickname: "무너진 마음이"
+                        profileImageId: 4
+                      profileImageId: 5
+                      lastChat: "이전 대화 내용이 들어갑니다."
+                      createdAt: "2024-11-05 10:42:00"
+                    - chatRoomId: 4
+                      sender:
+                        userId: 4
+                        nickname: "무너진 마음이"
+                        profileImageId: 4
+                      profileImageId: 5
+                      lastChat: "이전 대화 내용이 들어갑니다."
+                      createdAt: "2024-11-05 10:42:00"
+                    - chatRoomId: 5
+                      sender:
+                        userId: 5
+                        nickname: "무너진 마음이"
+                        profileImageId: 4
+                      profileImageId: 5
+                      lastChat: "이전 대화 내용이 들어갑니다."
+                      createdAt: "2024-11-05 10:42:00"
 
   /chatRoom/{chatRoomId}:
     get:
@@ -568,13 +777,43 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
-          description: successful operation
+        200:
+          description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ChatRoomDetail'
-
+              examples:
+                empty:
+                  value:
+                    chatRoomName: "익명의 소톡이"
+                    chats: []
+                    totalCount: 0
+                two:
+                  value:
+                    chatRoomName: "익명의 소톡이"
+                    chats:
+                      - chatId: 1
+                        content: "안녕하세요! 회의 자료 보내드립니다."
+                        sender:
+                          userId: 1
+                          nickname: "익명의 소톡이"
+                          profileImageId: 3
+                        createdAt: "2024-11-07 15:44"
+                        attachments: [ ]
+                      - chatId: 2
+                        content: ""
+                        sender:
+                          userId: 2
+                          nickname: "익명의 사업톡"
+                          profileImageId: 4
+                        createdAt: "2024-11-07 16:44"
+                        attachments:
+                          - fileId: 34
+                            fileName: "회의자료.pdf"
+                          - fileId: 45
+                            fileName: "이미지.jpg"
+                    totalCount: 2
   /chat:
     post:
       tags:
@@ -593,31 +832,65 @@ paths:
                   example: 123
                 content:
                   type: string
-                  example: 안녕하세요
+                  example: "안녕하세요"
                 attachments:
                   type: array
                   items:
                     type: string
                     format: binary
       responses:
-        '201':
-          description: Successful operation
+        200:
+          description: OK
           content:
             application/json:
               schema:
                 type: object
+                properties:
+                  chatId:
+                    type: integer
+                    example: 1
     get:
       tags:
         - 메시지
       summary: 최신 메시지 조회
       responses:
-        '200':
-          description: successful operation
+        200:
+          description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ChatList'
+              examples:
+                empty:
+                  value:
+                    totalCount: 0
+                    chats: []
+                two:
+                  value:
+                    totalCount: 1
+                    chat:
+                      - chatId: 2
+                        content: "안녕하세요! 회의 자료 보내드립니다."
+                        sender:
+                          userId: 3
+                          nickname: "익명의 소톡이"
+                          profileImageId: 3
+                        createdAt: "2024-11-07 15:44"
+                        attachments: []
+                      - chatId: 3
+                        content: ""
+                        sender:
+                          userId: 3
+                          nickname: "익명의 소톡이"
+                          profileImageId: 3
+                        createdAt: "2024-11-07 15:44"
+                        attachments:
+                          - fileId: 1
+                            fileName: "회의자료.png"
+                          - fileId: 2
+                            fileName: "회의자료.pdf"
 
+# TODO 리팩토링
   /myPage/profile:
     get:
       tags:
@@ -1027,49 +1300,42 @@ components:
           properties:
             boardType:
               type: string
-              example: 사업 톡톡
+              example: "SOSANG"
+            boardTypeName:
+              type: string
+              example: "소상톡톡"
             boardId:
               type: integer
-              example: 12312123
+              example: 1
             author:
               type: object
               properties:
                 nickname:
                   type: string
-                  example: 익명의소톡
+                  example: "익명의소톡"
                 profileImageId:
                   type: integer
-                  example: 354
+                  example: 12
             createdAt:
               type: string
-              example: 2024-11-05 17:39:00
+              example: "2024-11-05 17:39:00"
             title:
               type: string
-              example: K-Start up 에서 진행하는 지원 포탈
+              example: "K-Start up 에서 진행하는 지원 포탈"
             content:
               type: string
-              example: 우리 구에서는 저렴한 가격과 양질의...
+              example: "우리 구에서는 저렴한 가격과 양질의..."
             attachments:
               type: array
-              example: [
-                {
-                  fileName: 착한가격업소_지원사업_소개.doc,
-                  fileId: 344,
-                },
-                {
-                  fileName: 착한가격업소_지정_신청서.pdf,
-                  fileId: 354,
-                }
-              ]
-              # items:
-              #   type: object
-              #   properties:
-              #     fileName:
-              #       type: string
-              #       example: 착한가격업소_지정_신청서.pdf
-              #     fileId:
-              #       type: integer
-              #       example: 354
+              items:
+                type: object
+                properties:
+                  fileName:
+                    type: string
+                    example: "착한가격업소_지원사업_소개.doc"
+                  fileId:
+                    type: integer
+                    example: 344
             likesCount:
               type: integer
               example: 11
@@ -1082,110 +1348,73 @@ components:
               type: integer
               example: 11
         comments:
-          type: array
-          example: [
-            {
-              commentId: 5410,
-              nickname: 익명의 질문자,
-              createdAt: 2024-11-05 17:47:00,
-              content: 네이버에서 검색하니까 정부 24앱에서 확인하고 있음,
-              attachments: [
-                {
-                  fileName: 착한가격업소_지원사업_소개.doc,
-                  fileId: 344,
-                },
-                {
-                  fileName: 착한가격업소_지정_신청서.pdf,
-                  fileId: 354,
-                }
-              ],
-              likesCount: 11,
-              like: true,
-              comments: [
-                {
-                  commentId: 6578,
-                  nickname: 익명의 대댓글 작성자,
-                  createdAt: 2024-11-05 17:47:00,
-                  content: 먼데 나도 알려줘,
-                  attachments: [
-                    {
-                      fileName: 착한가격업소_지원사업_소개.doc,
-                      fileId: 344,
-                    },
-                    {
-                      fileName: 착한가격업소_지정_신청서.pdf,
-                      fileId: 354,
-                    }
-                  ],
-                  likesCount: 1,
-                  like: true,
-                },
-                {
-                  commentId: 6588,
-                  nickname: 익명의 대댓글 작성자,
-                  createdAt: 2024-11-05 17:51:00,
-                  content: 나도나도~~,
-                  attachments: [],
-                  likesCount: 0,
-                  like: true,
-                }
-              ],
-            }
-          ]
-          # items:
-          #   type: object
-          #   properties:
-          #     nickname:
-          #       type: string
-          #       example: 익명의 질문자
-          #     createdAt:
-          #       type: string
-          #       example: 2024-11-05 17:47:00
-          #     content:
-          #       type: string
-          #       example: 네이버에서 검색하니까 정부 24앱에서 확인하고 있음
-          #     attachments:
-          #       type: array
-          #       items:
-          #         type: object
-          #         properties:
-          #           fileName:
-          #             type: string
-          #             example: 착한가격업소_지정_신청서.pdf
-          #           fileId:
-          #             type: integer
-          #             example: 354
-          #     likesCount:
-          #       type: integer
-          #       example: 11
-          #     comments:
-          #       type: array
-          #       items:
-          #         type: object
-          #         properties:
-          #           nickname:
-          #             type: string
-          #             example: 익명의 대댓글 작성자
-          #           createdAt:
-          #             type: string
-          #             example: 2024-11-05 17:47:00
-          #           content:
-          #             type: string
-          #             example: 먼데 나도 알려줘
-          #           attachments:
-          #             type: array
-          #             items:
-          #               type: object
-          #               properties:
-          #                 fileName:
-          #                   type: string
-          #                   example: 착한가격업소_지정_신청서.pdf
-          #                 fileId:
-          #                   type: integer
-          #                   example: 354
-          #           likesCount:
-          #             type: integer
-          #             example: 0
+          $ref: '#/components/schemas/Comments'
+    Comments:
+      type: array
+      items:
+        type: object
+        properties:
+          commentId:
+            type: integer
+            example: 1
+          nickname:
+            type: string
+            example: "익명의 소톡"
+          createdAt:
+            type: string
+            example: "2024-11-05 17:39:00"
+          content:
+            type: string
+            example: "먼데 나도 알려줘"
+          attachments:
+            type: array
+            items:
+              type: object
+              properties:
+                fileName:
+                  type: string
+                  example: "착한가격업소_지원사업_소개.doc"
+                fileId:
+                  type: integer
+                  example: 1
+                likesCount:
+                  type: integer
+                  example: 1
+                like:
+                  type: boolean
+          comments:
+            type: array
+            items:
+              type: object
+              properties:
+                commentId:
+                  type: integer
+                  example: 1
+                nickname:
+                  type: string
+                  example: "익명의 소톡"
+                createdAt:
+                  type: string
+                  example: "2024-11-05 17:39:00"
+                content:
+                  type: string
+                  example: "먼데 나도 알려줘"
+                attachments:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      fileName:
+                        type: string
+                        example: "착한가격업소_지원사업_소개.doc"
+                      fileId:
+                        type: integer
+                        example: 1
+                      likesCount:
+                        type: integer
+                        example: 1
+                      like:
+                        type: boolean
     BoardList:
       type: object
       properties:
@@ -1194,308 +1423,168 @@ components:
           example: 1
         contents:
           type: array
-          example: [
-            {
-              boardId: 547,
-              boardTypeName: 사업톡톡,
-              title: 지원을 알아봅시다,
-              content: 다양한 소상공인 지원에 대해서 알아보아요~,
-              createdAt: 2024-11-01 18:45:00,
-              author: {
-                nickname: 소통장,
-                profileFileId: 21,
-              },
-              likesCount: 540,
-              like: true,
-              commentsCount: 34,
-              viewCount: 8463,
-              bookmark: true,
-            },
-            {
-              boardId: 566,
-              boardTypeName: 소상톡톡,
-              title: 사업하는거 너무 힘드네요,
-              content: '사업 다들 어떻게 하시나요?',
-              createdAt: 2024-11-07 10:42:00,
-              author: {
-                nickname: 익명의소톡,
-                profileFileId: 354,
-              },
-              likesCount: 11,
-              like: true,
-              commentsCount: 3,
-              viewCount: 20,
-              bookmark: true,
-            }
-          ]
-          # items:
-          #   type: object
-          #   properties:
-          #     boardTypeName:
-          #       type: string
-          #       example: 사업톡톡
-          #     title:
-          #       type: string
-          #       example: 사업하는거 너무 힘드네요
-          #     content:
-          #       type: string
-          #       example: 사업 다들 어떻게 하시나요?
-          #     createdAt:
-          #       type: string
-          #       example: 2024-11-07 10:42:00
-          #     author:
-          #       type: object
-          #       properties:
-          #         nickname:
-          #           type: string
-          #           example: 익명의소톡
-          #         profileFileId:
-          #           type: integer
-          #           example: 354
-          #     likesCount:
-          #       type: integer
-          #       example: 11
-          #     commentsCount:
-          #       type: integer
-          #       example: 3
-          #     viewCount:
-          #       type: integer
-          #       example: 20
-          #     bookmark:
-          #       type: boolean
-    BoardBestList:
-      type: object
-      properties:
-        contents:
-          type: array
-          example: [
-            {
-              boardId: 52,
-              boardTypeName: 사업톡톡,
-              title: 주요 업데이트된 기능 안내,
-              createdAt: 2024-11-05 17:39:00,
-              author: {
-                nickname: 익명의소톡,
-                profileFileId: 354,
-              },
-            },
-            {
-              boardId: 82,
-              boardTypeName: 소상톡톡,
-              title: 가을 축제 열어봅시다,
-              createdAt: 2024-11-10 10:22:00,
-              author: {
-                nickname: 조용한 거위,
-                profileFileId: 88,
-              },
-            }
-          ]
-          # items:
-          #   type: object
-          #   properties:
-          #     boardTypeName:
-          #       type: string
-          #       example: 사업톡톡
-          #     title:
-          #       type: string
-          #       example: 주요 업데이트된 기능 안내
-          #     createdAt:
-          #       type: string
-          #       example: 2024-11-05 17:39:00
-          #     author:
-          #       type: object
-          #       properties:
-          #         nickname:
-          #           type: string
-          #           example: 익명의소톡
-          #         profileFileId:
-          #           type: integer
-          #           example: 354
+          items:
+            type: object
+            properties:
+              boardId:
+                type: integer
+                example: 1
+              boardTypeName:
+                type: string
+                example: "사업톡톡"
+              boardType:
+                type: string
+                example: "SAUP"
+              title:
+                type: string
+                example: "사업하는거 너무 힘드네요"
+              content:
+                type: string
+                example: "사업 다들 어떻게 하시나요?"
+              createdAt:
+                type: string
+                example: "2024-11-07 10:42:00"
+              author:
+                type: object
+                properties:
+                  nickname:
+                    type: string
+                    example: "익명의소톡"
+                  profileFileId:
+                    type: integer
+                    example: 354
+              likesCount:
+                type: integer
+                example: 11
+              commentsCount:
+                type: integer
+                example: 3
+              viewCount:
+                type: integer
+                example: 20
+              bookmark:
+                type: boolean
     BoardType:
       type: string
       enum:
-        - sosang
-        - saup
+        - SOSANG
+        - SAUP
     ChatRoomList:
       type: array
-      example: [
-        {
-          chatRoomId: 5,
-          sender: {
-            userId: 3,
-            nickname: 익명의 소톡이,
-            profileImageId: 3,
-          },
-          profileImageId: 123,
-          lastChat: 이전 대화 내용이 들어갑니다.,
-          createdAt: 2024-11-07 10:42:00,
-        },
-        {
-          chatRoomId: 16,
-          sender: {
-            userId: 567,
-            nickname: 무너진 마음이,
-            profileImageId: 67,
-          },
-          profileImageId: 125,
-          lastChat: 이전 대화 내용이 들어갑니다.,
-          createdAt: 2024-11-05 12:50:15,
-        }
-      ]
-      # items:
-      #   type: object
-      #   properties:
-      #     chatRoomId:
-      #       type: integer
-      #       example: 5
-      #     sender:
-      #       type: object
-      #       properties:
-      #         userId:
-      #           type: integer
-      #           example: 3
-      #         nickname:
-      #           type: string
-      #           example: 익명의 소톡이
-      #         profileImageId:
-      #           type: integer
-      #           example: 3
-      #     profileImageId:
-      #       type: integer
-      #       example: 123
-      #     lastChat:
-      #       type: string
-      #       example: 이전 대화 내용이 들어갑니다.
-      #     createdAt:
-      #       type: string
-      #       example: 2024-11-07 10:42:00
+      items:
+        type: object
+        properties:
+          chatRoomId:
+            type: integer
+            example: 1
+          sender:
+            type: object
+            properties:
+              userId:
+                type: integer
+                example: 1
+              nickname:
+                type: string
+                example: "익명의 소톡이"
+              profileImageId:
+                type: integer
+                example: 3
+          profileImageId:
+            type: integer
+            example: 123
+          lastChat:
+            type: string
+            example: "이전 대화 내용이 들어갑니다."
+          createdAt:
+            type: string
+            example: "2024-11-07 10:42:00"
     ChatRoomDetail:
       type: object
       properties:
         chats:
           type: array
-          example: [
-            {
-              chatId: 2,
-              content: 안녕하세요! 회의 자료 보내드립니다.,
-              sender: {
-                userId: 3,
-                nickname: 익명의 소톡이,
-                profileImageId: 3,
-              },
-              createdAt: 2024-11-07 15:44,
-              attachments: [
-                {
-                  fileId: 34,
-                  fileName: 회의자료.pdf,
-                }
-              ],
-            },
-            {
-              chatId: 3,
-              content: 잘 받았습니다 감사합니다~,
-              sender: {
-                userId: 55,
-                nickname: 중후한 호랑이,
-                profileImageId: 74,
-              },
-              createdAt: 2024-11-07 15:54,
-              attachments: [],
-            }
-          ]
-          # items:
-          #   type: object
-          #   properties:
-          #     chatId:
-          #       type: integer
-          #       example: 2
-          #     content:
-          #       type: string
-          #       example: 안녕하세요! 회의 자료 보내드립니다.
-          #     sender:
-          #       type: object
-          #       properties:
-          #         userId:
-          #           type: integer
-          #           example: 3
-          #         nickname:
-          #           type: string
-          #           example: 익명의 소톡이
-          #         profileImageId:
-          #           type: integer
-          #           example: 3
-          #     createdAt:
-          #       type: string
-          #       example: 2024-11-07 15:44
-          #     attachments:
-          #       type: array
-          #       items:
-          #         type: object
-          #         properties:
-          #           fileId:
-          #             type: integer
-          #             example: 34
-          #           fileName:
-          #             type: string
-          #             example: 회의자료.pdf
+          items:
+            type: object
+            properties:
+              chatId:
+                type: integer
+                example: 2
+              content:
+                type: string
+                example: "안녕하세요! 회의 자료 보내드립니다."
+              sender:
+                type: object
+                properties:
+                  userId:
+                    type: integer
+                    example: 3
+                  nickname:
+                    type: string
+                    example: "익명의 소톡이"
+                  profileImageId:
+                    type: integer
+                    example: 3
+              createdAt:
+                type: string
+                example: "2024-11-07 15:44"
+              attachments:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    fileId:
+                      type: integer
+                      example: 34
+                    fileName:
+                      type: string
+                      example: "회의자료.pdf"
         totalCount:
           type: integer
           example: 100
+        chatRoomName:
+          type: string
+          example: "가난한 토깽이"
     ChatList:
-      type: array
-      example: [
-        {
-          chatId: 2,
-          content: 안녕하세요! 회의 자료 보내드립니다.,
-          sender: {
-            userId: 3,
-            nickname: 익명의 소톡이,
-            profileImageId: 3,
-          },
-          createdAt: 2024-11-07 15:44,
-          attachments: [
-            {
-              fileId: 34,
-              fileName: 회의자료.pdf,
-            }
-          ],
-        }
-      ]
-      # items:
-      #   type: object
-      #   properties:
-      #     chatId:
-      #       type: integer
-      #       example: 2
-      #     content:
-      #       type: string
-      #       example: 안녕하세요! 회의 자료 보내드립니다.
-      #     sender:
-      #       type: object
-      #       properties:
-      #         userId:
-      #           type: integer
-      #           example: 3
-      #         nickname:
-      #           type: string
-      #           example: 익명의 소톡이
-      #         profileImageId:
-      #           type: integer
-      #           example: 3
-      #     createdAt:
-      #       type: string
-      #       example: 2024-11-07 15:44
-      #     attachments:
-      #       type: array
-      #       items:
-      #         type: object
-      #         properties:
-      #           fileId:
-      #             type: integer
-      #             example: 34
-      #           fileName:
-      #             type: string
-      #             example: 회의자료.pdf
+      type: object
+      properties:
+        chats:
+          type: array
+          properties:
+            chatId:
+              type: integer
+              example: 1
+            content:
+              type: string
+              example: "안녕하세요! 회의 자료 보내드립니다."
+            sender:
+              type: object
+              properties:
+                userId:
+                  type: integer
+                  example: 1
+                nickname:
+                  type: string
+                  example: "익명의 소톡이"
+                profileImageId:
+                  type: integer
+                  example: 1
+            createdAt:
+              type: string
+              example: "2024-11-07 15:44"
+            attachments:
+              type: array
+              items:
+                type: object
+                properties:
+                  fileId:
+                    type: integer
+                    example: 34
+                  fileName:
+                    type: string
+                    example: "회의자료.pdf"
+        totalCount:
+          type: integer
+          example: 1
     User:
       type: object
       properties:
@@ -1523,3 +1612,47 @@ components:
         businessTypeId:
           type: integer
           example: 34
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+            message:
+              type: string
+          required:
+            - code
+            - message
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  responses:
+    OK:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            type: object
+    Unauthorized:
+      description: 액세스 토큰이 비어 있거나 유효하지 않은 경우
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            value:
+              code: 401
+              message: unauthorized
+    Forbidden:
+      description: 권한이 없는 경우
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            value:
+              code: 403
+              message: forbidden
