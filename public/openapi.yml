@@ -763,6 +763,30 @@ paths:
                       profileImageId: 5
                       lastChat: "이전 대화 내용이 들어갑니다."
                       createdAt: "2024-11-05 10:42:00"
+    post:
+      tags:
+        - 메시지
+      summary: 채팅방 만들기
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                otherUserId:
+                  type: integer
+                  example: 1
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  chatRoomId:
+                    type: integer
+                    example: 1
 
   /chatRoom/{chatRoomId}:
     get:
