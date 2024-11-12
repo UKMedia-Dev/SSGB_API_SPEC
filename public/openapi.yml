@@ -710,59 +710,65 @@ paths:
                 $ref: '#/components/schemas/ChatRoomList'
               examples:
                 empty:
-                  value: [ ]
+                  value:
+                    totalCount: 0
+                    chatRooms: [ ]
                 one:
                   value:
-                    - chatRoomId: 1
-                      sender:
-                        userId: 1
-                        nickname: "익명의 소톡이"
-                        profileImageId: 3
-                      profileImageId: 4
-                      lastChat: "이전 대화 내용이 들어갑니다."
-                      createdAt: "2024-11-07 10:42:00"
+                    totalCount: 1
+                    chatRooms:
+                      - chatRoomId: 1
+                        sender:
+                          userId: 1
+                          nickname: "익명의 소톡이"
+                          profileImageId: 3
+                        profileImageId: 4
+                        lastChat: "이전 대화 내용이 들어갑니다."
+                        createdAt: "2024-11-07 10:42:00"
                 many:
                   value:
-                    - chatRoomId: 1
-                      sender:
-                        userId: 1
-                        nickname: "익명의 소톡이"
-                        profileImageId: 3
-                      profileImageId: 4
-                      lastChat: "이전 대화 내용이 들어갑니다."
-                      createdAt: "2024-11-07 10:42:00"
-                    - chatRoomId: 2
-                      sender:
-                        userId: 2
-                        nickname: "무너진 마음이"
+                    totalCount: 5
+                    chatRooms:
+                      - chatRoomId: 1
+                        sender:
+                          userId: 1
+                          nickname: "익명의 소톡이"
+                          profileImageId: 3
                         profileImageId: 4
-                      profileImageId: 5
-                      lastChat: "이전 대화 내용이 들어갑니다."
-                      createdAt: "2024-11-05 10:42:00"
-                    - chatRoomId: 3
-                      sender:
-                        userId: 3
-                        nickname: "무너진 마음이"
-                        profileImageId: 4
-                      profileImageId: 5
-                      lastChat: "이전 대화 내용이 들어갑니다."
-                      createdAt: "2024-11-05 10:42:00"
-                    - chatRoomId: 4
-                      sender:
-                        userId: 4
-                        nickname: "무너진 마음이"
-                        profileImageId: 4
-                      profileImageId: 5
-                      lastChat: "이전 대화 내용이 들어갑니다."
-                      createdAt: "2024-11-05 10:42:00"
-                    - chatRoomId: 5
-                      sender:
-                        userId: 5
-                        nickname: "무너진 마음이"
-                        profileImageId: 4
-                      profileImageId: 5
-                      lastChat: "이전 대화 내용이 들어갑니다."
-                      createdAt: "2024-11-05 10:42:00"
+                        lastChat: "이전 대화 내용이 들어갑니다."
+                        createdAt: "2024-11-07 10:42:00"
+                      - chatRoomId: 2
+                        sender:
+                          userId: 2
+                          nickname: "무너진 마음이"
+                          profileImageId: 4
+                        profileImageId: 5
+                        lastChat: "이전 대화 내용이 들어갑니다."
+                        createdAt: "2024-11-05 10:42:00"
+                      - chatRoomId: 3
+                        sender:
+                          userId: 3
+                          nickname: "무너진 마음이"
+                          profileImageId: 4
+                        profileImageId: 5
+                        lastChat: "이전 대화 내용이 들어갑니다."
+                        createdAt: "2024-11-05 10:42:00"
+                      - chatRoomId: 4
+                        sender:
+                          userId: 4
+                          nickname: "무너진 마음이"
+                          profileImageId: 4
+                        profileImageId: 5
+                        lastChat: "이전 대화 내용이 들어갑니다."
+                        createdAt: "2024-11-05 10:42:00"
+                      - chatRoomId: 5
+                        sender:
+                          userId: 5
+                          nickname: "무너진 마음이"
+                          profileImageId: 4
+                        profileImageId: 5
+                        lastChat: "이전 대화 내용이 들어갑니다."
+                        createdAt: "2024-11-05 10:42:00"
     post:
       tags:
         - 메시지
@@ -811,7 +817,7 @@ paths:
                 empty:
                   value:
                     chatRoomName: "익명의 소톡이"
-                    chats: []
+                    chats: [ ]
                     totalCount: 0
                 two:
                   value:
@@ -888,7 +894,7 @@ paths:
                 empty:
                   value:
                     totalCount: 0
-                    chats: []
+                    chats: [ ]
                 two:
                   value:
                     totalCount: 1
@@ -900,7 +906,7 @@ paths:
                           nickname: "익명의 소톡이"
                           profileImageId: 3
                         createdAt: "2024-11-07 15:44"
-                        attachments: []
+                        attachments: [ ]
                       - chatId: 3
                         content: ""
                         sender:
@@ -914,7 +920,7 @@ paths:
                           - fileId: 2
                             fileName: "회의자료.pdf"
 
-# TODO 리팩토링
+  # TODO 리팩토링
   /myPage/profile:
     get:
       tags:
