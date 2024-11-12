@@ -712,17 +712,17 @@ paths:
                 empty:
                   value:
                     totalCount: 0
-                    chatRooms: [ ]
+                    chatRooms: []
                 one:
                   value:
                     totalCount: 1
                     chatRooms:
                       - chatRoomId: 1
+                        chatRoomName: "익명의 소톡이"
                         sender:
                           userId: 1
                           nickname: "익명의 소톡이"
                           profileImageId: 3
-                        profileImageId: 4
                         lastChat: "이전 대화 내용이 들어갑니다."
                         createdAt: "2024-11-07 10:42:00"
                 many:
@@ -730,43 +730,43 @@ paths:
                     totalCount: 5
                     chatRooms:
                       - chatRoomId: 1
+                        chatRoomName: "익명의 소톡이"
                         sender:
                           userId: 1
                           nickname: "익명의 소톡이"
                           profileImageId: 3
-                        profileImageId: 4
                         lastChat: "이전 대화 내용이 들어갑니다."
                         createdAt: "2024-11-07 10:42:00"
                       - chatRoomId: 2
+                        chatRoomName: "익명의 소톡이"
                         sender:
                           userId: 2
                           nickname: "무너진 마음이"
                           profileImageId: 4
-                        profileImageId: 5
                         lastChat: "이전 대화 내용이 들어갑니다."
                         createdAt: "2024-11-05 10:42:00"
                       - chatRoomId: 3
+                        chatRoomName: "익명의 소톡이"
                         sender:
                           userId: 3
                           nickname: "무너진 마음이"
-                          profileImageId: 4
                         profileImageId: 5
                         lastChat: "이전 대화 내용이 들어갑니다."
                         createdAt: "2024-11-05 10:42:00"
                       - chatRoomId: 4
+                        chatRoomName: "익명의 소톡이"
                         sender:
                           userId: 4
                           nickname: "무너진 마음이"
                           profileImageId: 4
-                        profileImageId: 5
                         lastChat: "이전 대화 내용이 들어갑니다."
                         createdAt: "2024-11-05 10:42:00"
                       - chatRoomId: 5
+                        chatRoomName: "익명의 소톡이"
                         sender:
                           userId: 5
                           nickname: "무너진 마음이"
                           profileImageId: 4
-                        profileImageId: 5
                         lastChat: "이전 대화 내용이 들어갑니다."
                         createdAt: "2024-11-05 10:42:00"
     post:
