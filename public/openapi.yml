@@ -595,6 +595,9 @@ paths:
             schema:
               type: object
               properties:
+                boardId:
+                  type: integer
+                  example: 1
                 content:
                   type: string
                 attachments:
