@@ -809,6 +809,18 @@ paths:
           required: true
           schema:
             type: integer
+        - name: page
+          in: query
+          description: 페이지
+          schema:
+            type: integer
+            default: 1
+        - name: size
+          in: query
+          description: 페이지 별 콘텐츠 수
+          schema:
+            type: integer
+            default: 10
       responses:
         200:
           description: OK
