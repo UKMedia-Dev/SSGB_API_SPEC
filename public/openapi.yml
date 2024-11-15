@@ -636,68 +636,38 @@ paths:
                   - boardId: 1
                     boardTypeName: "사업톡톡"
                     title: "지원을 알아봅시다"
-                    content: "다양한 소상공인 지원에 대해서 알아보아요~"
                     createdAt: "2024-11-01 18:45:00"
                     author:
                       nickname: "소통장"
                       profileFileId: 21
-                    likesCount: 540
-                    like: true
-                    commentsCount: 34
-                    viewCount: 8463
-                    bookmark: true
                   - boardId: 2
                     boardTypeName: "소상톡톡"
                     title: "사업하는거 너무 힘드네요"
-                    content: "사업 다들 어떻게 하시나요?"
                     createdAt: "2024-11-07 10:42:00"
                     author:
                       nickname: "익명의소톡"
                       profileFileId: 354
-                    likesCount: 11
-                    like: true
-                    commentsCount: 3
-                    viewCount: 20
-                    bookmark: true
                   - boardId: 3
                     boardTypeName: "소상톡톡"
                     title: "사업하는거 너무 힘드네요"
-                    content: "사업 다들 어떻게 하시나요?"
                     createdAt: "2024-11-07 10:42:00"
                     author:
                       nickname: "익명의소톡"
                       profileFileId: 354
-                    likesCount: 11
-                    like: true
-                    commentsCount: 3
-                    viewCount: 20
-                    bookmark: true
                   - boardId: 4
                     boardTypeName: "소상톡톡"
                     title: "사업하는거 너무 힘드네요"
-                    content: "사업 다들 어떻게 하시나요?"
                     createdAt: "2024-11-07 10:42:00"
                     author:
                       nickname: "익명의소톡"
                       profileFileId: 354
-                    likesCount: 11
-                    like: true
-                    commentsCount: 3
-                    viewCount: 20
-                    bookmark: true
                   - boardId: 5
                     boardTypeName: "사업톡톡"
                     title: "지원을 알아봅시다"
-                    content: "다양한 소상공인 지원에 대해서 알아보아요~"
                     createdAt: "2024-11-01 18:45:00"
                     author:
                       nickname: "소통장"
                       profileFileId: 21
-                    likesCount: 540
-                    like: true
-                    commentsCount: 34
-                    viewCount: 8463
-                    bookmark: true
 
   /chatRoom:
     get:
