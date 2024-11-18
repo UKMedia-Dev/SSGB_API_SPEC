@@ -826,8 +826,10 @@ paths:
                         attachments:
                           - fileId: 34
                             fileName: "회의자료.pdf"
+                            url: https://www.naver.com
                           - fileId: 45
                             fileName: "이미지.jpg"
+                            url: https://www.naver.com
                     totalCount: 2
   /chat:
     post:
@@ -902,8 +904,10 @@ paths:
                         attachments:
                           - fileId: 1
                             fileName: "회의자료.png"
+                            url: https://www.naver.com
                           - fileId: 2
                             fileName: "회의자료.pdf"
+                            url: https://www.naver.com
 
   /myPage/profile:
     get:
@@ -1429,6 +1433,9 @@ components:
                   fileId:
                     type: integer
                     example: 344
+                  url:
+                    type: string
+                    example: "https://www.naver.com"
             likesCount:
               type: integer
               example: 11
@@ -1472,6 +1479,9 @@ components:
                 fileId:
                   type: integer
                   example: 1
+                url:
+                  type: string
+                  example: "https://www.naver.com"
           likesCount:
             type: integer
             example: 1
@@ -1505,6 +1515,9 @@ components:
                       fileId:
                         type: integer
                         example: 1
+                      url:
+                        type: string
+                        example: "https://www.naver.com"
                 likesCount:
                   type: integer
                   example: 1
@@ -1633,6 +1646,9 @@ components:
                     fileName:
                       type: string
                       example: "회의자료.pdf"
+                    url:
+                      type: string
+                      example: "https://www.naver.com"
         totalCount:
           type: integer
           example: 100
@@ -1677,6 +1693,9 @@ components:
                   fileName:
                     type: string
                     example: "회의자료.pdf"
+                  url:
+                    type: string
+                    example: "https://www.naver.com"
         totalCount:
           type: integer
           example: 1
