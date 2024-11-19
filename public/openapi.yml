@@ -316,7 +316,8 @@ paths:
                         createdAt: "2024-11-01 18:45:00"
                         author:
                           nickname: "소통장"
-                          profileFileId: 21
+                          profileImageId: 21
+                          filePath: "imageFileUrl.com"
                         likesCount: 540
                         like: true
                         commentsCount: 34
@@ -329,7 +330,8 @@ paths:
                         createdAt: "2024-11-07 10:42:00"
                         author:
                           nickname: "익명의소톡"
-                          profileFileId: 354
+                          profileImageId: 354
+                          filePath: "imageFileUrl.com"
                         likesCount: 11
                         like: true
                         commentsCount: 3
@@ -346,7 +348,8 @@ paths:
                         createdAt: "2024-11-01 18:45:00"
                         author:
                           nickname: "소통장"
-                          profileFileId: 21
+                          profileImageId: 21
+                          filePath: "imageFileUrl.com"
                         likesCount: 540
                         like: true
                         commentsCount: 34
@@ -359,7 +362,8 @@ paths:
                         createdAt: "2024-11-07 10:42:00"
                         author:
                           nickname: "익명의소톡"
-                          profileFileId: 354
+                          profileImageId: 354
+                          filePath: "imageFileUrl.com"
                         likesCount: 11
                         like: true
                         commentsCount: 3
@@ -372,7 +376,8 @@ paths:
                         createdAt: "2024-11-07 10:42:00"
                         author:
                           nickname: "익명의소톡"
-                          profileFileId: 354
+                          profileImageId: 354
+                          filePath: "imageFileUrl.com"
                         likesCount: 11
                         like: true
                         commentsCount: 3
@@ -385,7 +390,8 @@ paths:
                         createdAt: "2024-11-07 10:42:00"
                         author:
                           nickname: "익명의소톡"
-                          profileFileId: 354
+                          profileImageId: 354
+                          filePath: "imageFileUrl.com"
                         likesCount: 11
                         like: true
                         commentsCount: 3
@@ -398,7 +404,8 @@ paths:
                         createdAt: "2024-11-01 18:45:00"
                         author:
                           nickname: "소통장"
-                          profileFileId: 21
+                          profileImageId: 21
+                          filePath: "imageFileUrl.com"
                         likesCount: 540
                         like: true
                         commentsCount: 34
@@ -639,35 +646,73 @@ paths:
                     createdAt: "2024-11-01 18:45:00"
                     author:
                       nickname: "소통장"
-                      profileFileId: 21
+                      profileImageId: 21
+                      filePath: "imageFileUrl.com"
                   - boardId: 2
                     boardTypeName: "소상톡톡"
                     title: "사업하는거 너무 힘드네요"
                     createdAt: "2024-11-07 10:42:00"
                     author:
                       nickname: "익명의소톡"
-                      profileFileId: 354
+                      profileImageId: 354
+                      filePath: "imageFileUrl.com"
                   - boardId: 3
                     boardTypeName: "소상톡톡"
                     title: "사업하는거 너무 힘드네요"
                     createdAt: "2024-11-07 10:42:00"
                     author:
                       nickname: "익명의소톡"
-                      profileFileId: 354
+                      profileImageId: 354
+                      filePath: "imageFileUrl.com"
                   - boardId: 4
                     boardTypeName: "소상톡톡"
                     title: "사업하는거 너무 힘드네요"
                     createdAt: "2024-11-07 10:42:00"
                     author:
                       nickname: "익명의소톡"
-                      profileFileId: 354
+                      profileImageId: 354
+                      filePath: "imageFileUrl.com"
                   - boardId: 5
                     boardTypeName: "사업톡톡"
                     title: "지원을 알아봅시다"
                     createdAt: "2024-11-01 18:45:00"
                     author:
                       nickname: "소통장"
-                      profileFileId: 21
+                      profileImageId: 21
+                      filePath: "imageFileUrl.com"
+
+  /board/event:
+    get:
+      tags:
+        - 게시판
+      summary: 이벤트 광고 목록
+      security: [ ]
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              example:
+                totalCount: 5
+                contents:
+                  - eventType: "TEXT"
+                    link: "https://www.naver.com/"
+                    title: "'소톡'은 처음이지?1"
+                    content: "이벤트 내용을 입력해주세요. 이벤트 내용을 입력해주세요. 이벤트 내용을 입력해주세요."
+                  - eventType: "IMAGE"
+                    link: "https://www.naver.com/"
+                    filePath: "imageFileUrl.com"
+                  - eventType: "TEXT"
+                    link: "https://www.naver.com/"
+                    title: "'소톡'은 처음이지?2"
+                    content: "이벤트 내용을 입력해주세요. 이벤트 내용을 입력해주세요. 이벤트 내용을 입력해주세요."
+                  - eventType: "IMAGE"
+                    link: "https://www.naver.com/"
+                    filePath: "imageFileUrl.com"
+                  - eventType: "TEXT"
+                    link: "https://www.naver.com/"
+                    title: "'소톡'은 처음이지?3"
+                    content: "이벤트 내용을 입력해주세요. 이벤트 내용을 입력해주세요. 이벤트 내용을 입력해주세요."
 
   /chatRoom:
     get:
@@ -696,6 +741,7 @@ paths:
                           userId: 1
                           nickname: "익명의 소톡이"
                           profileImageId: 3
+                          filePath: "imageFileUrl.com"
                         lastChat: "이전 대화 내용이 들어갑니다."
                         createdAt: "2024-11-07 10:42:00"
                 many:
@@ -708,6 +754,7 @@ paths:
                           userId: 1
                           nickname: "익명의 소톡이"
                           profileImageId: 3
+                          filePath: "imageFileUrl.com"
                         lastChat: "이전 대화 내용이 들어갑니다."
                         createdAt: "2024-11-07 10:42:00"
                       - chatRoomId: 2
@@ -716,6 +763,7 @@ paths:
                           userId: 2
                           nickname: "무너진 마음이"
                           profileImageId: 4
+                          filePath: "imageFileUrl.com"
                         lastChat: "이전 대화 내용이 들어갑니다."
                         createdAt: "2024-11-05 10:42:00"
                       - chatRoomId: 3
@@ -723,7 +771,8 @@ paths:
                         sender:
                           userId: 3
                           nickname: "무너진 마음이"
-                        profileImageId: 5
+                          profileImageId: 5
+                          filePath: "imageFileUrl.com"
                         lastChat: "이전 대화 내용이 들어갑니다."
                         createdAt: "2024-11-05 10:42:00"
                       - chatRoomId: 4
@@ -732,6 +781,7 @@ paths:
                           userId: 4
                           nickname: "무너진 마음이"
                           profileImageId: 4
+                          filePath: "imageFileUrl.com"
                         lastChat: "이전 대화 내용이 들어갑니다."
                         createdAt: "2024-11-05 10:42:00"
                       - chatRoomId: 5
@@ -740,6 +790,7 @@ paths:
                           userId: 5
                           nickname: "무너진 마음이"
                           profileImageId: 4
+                          filePath: "imageFileUrl.com"
                         lastChat: "이전 대화 내용이 들어갑니다."
                         createdAt: "2024-11-05 10:42:00"
     post:
@@ -813,7 +864,8 @@ paths:
                         sender:
                           userId: 1
                           nickname: "익명의 소톡이"
-                          profileImageId: 3
+                          profileImageId: 4
+                          filePath: "imageFileUrl.com"
                         createdAt: "2024-11-07 15:44"
                         attachments: [ ]
                       - chatId: 2
@@ -822,14 +874,15 @@ paths:
                           userId: 2
                           nickname: "익명의 사업톡"
                           profileImageId: 4
+                          filePath: "imageFileUrl.com"
                         createdAt: "2024-11-07 16:44"
                         attachments:
                           - fileId: 34
                             fileName: "회의자료.pdf"
-                            url: https://www.naver.com
+                            filePath: https://www.naver.com
                           - fileId: 45
                             fileName: "이미지.jpg"
-                            url: https://www.naver.com
+                            filePath: https://www.naver.com
                     totalCount: 2
   /chat:
     post:
@@ -892,6 +945,7 @@ paths:
                           userId: 3
                           nickname: "익명의 소톡이"
                           profileImageId: 3
+                          filePath: "imageFileUrl.com"
                         createdAt: "2024-11-07 15:44"
                         attachments: [ ]
                       - chatId: 3
@@ -900,14 +954,15 @@ paths:
                           userId: 3
                           nickname: "익명의 소톡이"
                           profileImageId: 3
+                          filePath: "imageFileUrl.com"
                         createdAt: "2024-11-07 15:44"
                         attachments:
                           - fileId: 1
                             fileName: "회의자료.png"
-                            url: https://www.naver.com
+                            filePath: https://www.naver.com
                           - fileId: 2
                             fileName: "회의자료.pdf"
-                            url: https://www.naver.com
+                            filePath: https://www.naver.com
 
   /myPage/profile:
     get:
@@ -947,8 +1002,12 @@ paths:
                   profileImageId:
                     type: integer
                     example: 1
+                  filePath:
+                    type: string
+                    example: "imageFileUrl.com"
 
   /myPage/profile/nickname:
+
     patch:
       tags:
         - 마이페이지
@@ -1083,7 +1142,8 @@ paths:
                         createdAt: "2024-11-01 18:45:00"
                         author:
                           nickname: "소통장"
-                          profileFileId: 21
+                          profileImageId: 21
+                          filePath: "imageFileUrl.com"
                         likesCount: 540
                         like: true
                         commentsCount: 34
@@ -1096,7 +1156,8 @@ paths:
                         createdAt: "2024-11-07 10:42:00"
                         author:
                           nickname: "익명의소톡"
-                          profileFileId: 354
+                          profileImageId: 354
+                          filePath: "imageFileUrl.com"
                         likesCount: 11
                         like: true
                         commentsCount: 3
@@ -1113,7 +1174,8 @@ paths:
                         createdAt: "2024-11-01 18:45:00"
                         author:
                           nickname: "소통장"
-                          profileFileId: 21
+                          profileImageId: 21
+                          filePath: "imageFileUrl.com"
                         likesCount: 540
                         like: true
                         commentsCount: 34
@@ -1126,7 +1188,8 @@ paths:
                         createdAt: "2024-11-07 10:42:00"
                         author:
                           nickname: "익명의소톡"
-                          profileFileId: 354
+                          profileImageId: 354
+                          filePath: "imageFileUrl.com"
                         likesCount: 11
                         like: true
                         commentsCount: 3
@@ -1139,7 +1202,8 @@ paths:
                         createdAt: "2024-11-07 10:42:00"
                         author:
                           nickname: "익명의소톡"
-                          profileFileId: 354
+                          profileImageId: 354
+                          filePath: "imageFileUrl.com"
                         likesCount: 11
                         like: true
                         commentsCount: 3
@@ -1152,7 +1216,8 @@ paths:
                         createdAt: "2024-11-07 10:42:00"
                         author:
                           nickname: "익명의소톡"
-                          profileFileId: 354
+                          profileImageId: 354
+                          filePath: "imageFileUrl.com"
                         likesCount: 11
                         like: true
                         commentsCount: 3
@@ -1165,7 +1230,8 @@ paths:
                         createdAt: "2024-11-01 18:45:00"
                         author:
                           nickname: "소통장"
-                          profileFileId: 21
+                          profileImageId: 21
+                          filePath: "imageFileUrl.com"
                         likesCount: 540
                         like: true
                         commentsCount: 34
@@ -1413,6 +1479,9 @@ components:
                 profileImageId:
                   type: integer
                   example: 12
+                filePath:
+                  type: string
+                  example: "imageFileUrl.com"
             createdAt:
               type: string
               example: "2024-11-05 17:39:00"
@@ -1433,7 +1502,7 @@ components:
                   fileId:
                     type: integer
                     example: 344
-                  url:
+                  filePath:
                     type: string
                     example: "https://www.naver.com"
             likesCount:
@@ -1479,7 +1548,7 @@ components:
                 fileId:
                   type: integer
                   example: 1
-                url:
+                filePath:
                   type: string
                   example: "https://www.naver.com"
           likesCount:
@@ -1515,7 +1584,7 @@ components:
                       fileId:
                         type: integer
                         example: 1
-                      url:
+                      filePath:
                         type: string
                         example: "https://www.naver.com"
                 likesCount:
@@ -1558,9 +1627,12 @@ components:
                   nickname:
                     type: string
                     example: "익명의소톡"
-                  profileFileId:
+                  profileImageId:
                     type: integer
                     example: 354
+                  filePath:
+                    type: string
+                    example: "imageFileUrl.com"
               likesCount:
                 type: integer
                 example: 11
@@ -1597,6 +1669,9 @@ components:
               profileImageId:
                 type: integer
                 example: 3
+              filePath:
+                type: string
+                example: "imageFileUrl.com"
           profileImageId:
             type: integer
             example: 123
@@ -1646,7 +1721,7 @@ components:
                     fileName:
                       type: string
                       example: "회의자료.pdf"
-                    url:
+                    filePath:
                       type: string
                       example: "https://www.naver.com"
         totalCount:
@@ -1693,7 +1768,7 @@ components:
                   fileName:
                     type: string
                     example: "회의자료.pdf"
-                  url:
+                  filePath:
                     type: string
                     example: "https://www.naver.com"
         totalCount:
@@ -1708,7 +1783,7 @@ components:
         nicknameGenerationRemaining:
           type: integer
           example: 5
-        profileIamgeId:
+        profileImageId:
           type: integer
           example: 123
         email:
