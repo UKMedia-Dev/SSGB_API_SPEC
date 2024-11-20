@@ -1005,6 +1005,14 @@ paths:
                   filePath:
                     type: string
                     example: "imageFileUrl.com"
+    delete:
+      tags:
+        - 마이페이지
+      summary: 프로필 사진 삭제
+      responses:
+        200:
+          $ref: '#/components/responses/OK'
+
 
   /myPage/profile/nickname:
 
@@ -1017,13 +1025,18 @@ paths:
           application/json:
             schema:
               type: object
-              properties:
-                nickname:
-                  type: string
-                  example: "익명의 소톡소톡이"
       responses:
         200:
-          $ref: '#/components/responses/OK'
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                empty:
+                  value:
+                    nickname: "익명의 소톡이"
+                    nicknameGenerationRemaining: 4
 
   /myPage/profile/region:
     patch:
