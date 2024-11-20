@@ -1796,9 +1796,12 @@ components:
         nicknameGenerationRemaining:
           type: integer
           example: 5
-        profileImageId:
+        fileId:
           type: integer
           example: 123
+        filePath:
+          type: string
+          example: https://profile.url.com
         email:
           type: string
           example: test@example.com
