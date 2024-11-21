@@ -999,7 +999,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  profileImageId:
+                  fileId:
                     type: integer
                     example: 1
                   filePath:
@@ -1796,7 +1796,7 @@ components:
         nicknameGenerationRemaining:
           type: integer
           example: 5
-        fileId:
+        profileImageId:
           type: integer
           example: 123
         filePath:
