@@ -58,12 +58,12 @@ paths:
               type: object
               required:
                 - email
-                - authCode
+                - certNo
               properties:
                 email:
                   type: string
                   example: "test@example.com"
-                authCode:
+                certNo:
                   type: string
                   example: "445454"
       responses:
@@ -173,12 +173,12 @@ paths:
               type: object
               required:
                 - email
-                - authCode
+                - certNo
               properties:
                 email:
                   type: string
                   example: "test@example.com"
-                authCode:
+                certNo:
                   type: string
                   example: "445454"
       responses:
@@ -1076,9 +1076,9 @@ paths:
             schema:
               type: object
               required:
-                - authCode
+                - certNo
               properties:
-                authCode:
+                certNo:
                   type: string
                   example: "445454"
       responses:
