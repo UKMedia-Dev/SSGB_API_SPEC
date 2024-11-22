@@ -41,7 +41,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  expiredTime:
+                  expiredAt:
                     type: number
                     example: 1732253873491
 
