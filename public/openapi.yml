@@ -565,6 +565,47 @@ paths:
                     type: integer
                     example: 1
 
+  /comment/{commentId}:
+    put:
+      tags:
+        - 게시판
+      summary: 댓글 수정
+      parameters:
+        - name: commentId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                  example: '댓글 수정'
+                attachments:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+                deleteFileIds:
+                  type: array
+                  items:
+                    type: integer
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  commentId:
+                    type: integer
+                    example: 5
+
   /comment/{commentId}/like:
     post:
       tags:
