@@ -474,6 +474,51 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BoardDetail'
+    put:
+      tags:
+        - 게시판
+      summary: 게시글 수정
+      parameters:
+        - name: boardId
+          in: path
+          description: 상세 아이디
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                boardType:
+                  $ref: '#/components/schemas/BoardType'
+                title:
+                  type: string
+                  example: "익명의 소톡 모여라~"
+                content:
+                  type: string
+                  example: "고민들을 댓글로 적어주세요~"
+                attachments:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+                deleteFileIds:
+                  type: array
+                  items:
+                    type: integer
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  boardId:
+                    type: integer
+                    example: 1
 
   /board/{boardId}/like:
     post:
