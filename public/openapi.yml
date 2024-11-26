@@ -1114,6 +1114,19 @@ paths:
       tags:
         - 마이페이지
       summary: 북마크 목록
+      parameters:
+        - name: page
+          in: query
+          description: 현재 페이지
+          required: true
+          schema:
+            type: integer
+        - name: size
+          in: query
+          description: 페이지 당 표시 갯수
+          required: true
+          schema:
+            type: integer
       responses:
         200:
           description: OK
@@ -1238,6 +1251,19 @@ paths:
       tags:
         - 마이페이지
       summary: 작성글 목록
+      parameters:
+        - name: page
+          in: query
+          description: 현재 페이지
+          required: true
+          schema:
+            type: integer
+        - name: size
+          in: query
+          description: 페이지 당 표시 갯수
+          required: true
+          schema:
+            type: integer
       responses:
         200:
           description: OK
