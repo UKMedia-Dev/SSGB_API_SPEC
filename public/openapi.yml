@@ -1396,14 +1396,14 @@ paths:
                     totalCount: 2
                     boards:
                       - boardId: 2
-                        type: "board"
+                        contentType: "board"
                         boardTypeName: "소상톡톡"
                         title: "근처 같이 요리공부할 사람"
                         content: ""
                         nickname: "익명의 소톡이"
                         createdAt: "2024-11-08 16:30"
                       - boardId: 1
-                        type: "comment"
+                        contentType: "comment"
                         boardTypeName: "사업톡톡"
                         title: "근처 같이 요리공부할 사람"
                         content: "간되면 나도 같이 참여하고 싶은데..."
@@ -1414,35 +1414,35 @@ paths:
                     totalCount: 5
                     boards:
                       - boardId: 5
-                        type: "board"
+                        contentType: "board"
                         boardTypeName: "소상톡톡"
                         title: "근처 같이 요리공부할 사람"
                         content: ""
                         nickname: "익명의 소톡이"
                         createdAt: "2024-11-08 16:30"
                       - boardId: 4
-                        type: "board"
+                        contentType: "board"
                         boardTypeName: "소상톡톡"
                         title: "근처 같이 요리공부할 사람"
                         content: ""
                         nickname: "익명의 소톡이"
                         createdAt: "2024-11-08 16:30"
                       - boardId: 3
-                        type: "comment"
+                        contentType: "comment"
                         boardTypeName: "사업톡톡"
                         title: "근처 같이 요리공부할 사람"
                         content: "간되면 나도 같이 참여하고 싶은데..."
                         nickname: "익명의 소톡이"
                         createdAt: "2024-11-07 16:30"
                       - boardId: 2
-                        type: "board"
+                        contentType: "board"
                         boardTypeName: "소상톡톡"
                         title: "근처 같이 요리공부할 사람"
                         content: ""
                         nickname: "익명의 소톡이"
                         createdAt: "2024-11-08 16:30"
                       - boardId: 1
-                        type: "comment"
+                        contentType: "comment"
                         boardTypeName: "사업톡톡"
                         title: "근처 같이 요리공부할 사람"
                         content: "간되면 나도 같이 참여하고 싶은데..."
