@@ -1560,6 +1560,72 @@ paths:
                     - businessTypeId: 2
                       businessTypeName: "서비스업"
 
+  /combo/category:
+    get:
+      tags:
+        - 콤보
+      summary: 카테고리 목록 콤보
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  categories:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        categoryId:
+                          type: integer
+                        categoryType:
+                          type: string
+                        categoryTypeName:
+                          type: string
+                        category:
+                          type: string
+                        filePath:
+                          type: string
+              examples:
+                region:
+                  value:
+                    categories:
+                      - categoryId: 1
+                        categoryType: "REGION"
+                        categoryTypeName: "지역"
+                        category: "서울"
+                        filePath: "https://i.namu.wiki/i/nFkC0xs-jJa6FJSILN4VekIj1JPCRc2_mHs6YfO6-hQB08I5tYNjkgWJMC0xh4TVwfBzOPd8S1JEw3AAiKjlVlyzez9vzGmphSWlsE9dvPzOU2v_RHZ5UE7v0ocSwNLWP3HUUXQ-mHyb0igZtsOoqA.webp"
+                      - categoryId: 2
+                        categoryType: "REGION"
+                        categoryTypeName: "지역"
+                        category: "경기"
+                        filePath: "https://i.namu.wiki/i/nFkC0xs-jJa6FJSILN4VekIj1JPCRc2_mHs6YfO6-hQB08I5tYNjkgWJMC0xh4TVwfBzOPd8S1JEw3AAiKjlVlyzez9vzGmphSWlsE9dvPzOU2v_RHZ5UE7v0ocSwNLWP3HUUXQ-mHyb0igZtsOoqA.webp"
+                      - categoryId: 3
+                        categoryType: "REGION"
+                        categoryTypeName: "지역"
+                        category: "인천"
+                        filePath: "https://i.namu.wiki/i/nFkC0xs-jJa6FJSILN4VekIj1JPCRc2_mHs6YfO6-hQB08I5tYNjkgWJMC0xh4TVwfBzOPd8S1JEw3AAiKjlVlyzez9vzGmphSWlsE9dvPzOU2v_RHZ5UE7v0ocSwNLWP3HUUXQ-mHyb0igZtsOoqA.webp"
+                topic:
+                  value:
+                    categories:
+                      - categoryId: 1
+                        categoryType: "TOPIC"
+                        categoryTypeName: "토픽"
+                        category: "상권분석"
+                        filePath: "https://enterprise.kt.com/entpf/images/product/webResource/P_PD_AI_BD_002_s1-img.png"
+                      - categoryId: 2
+                        categoryType: "TOPIC"
+                        categoryTypeName: "토픽"
+                        category: "커리어"
+                        filePath: "https://enterprise.kt.com/entpf/images/product/webResource/P_PD_AI_BD_002_s1-img.png"
+                      - categoryId: 3
+                        categoryType: "TOPIC"
+                        categoryTypeName: "토픽"
+                        category: "매장분석"
+                        filePath: "https://enterprise.kt.com/entpf/images/product/webResource/P_PD_AI_BD_002_s1-img.png"
+
 components:
   schemas:
     BoardDetail:
