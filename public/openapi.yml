@@ -158,7 +158,15 @@ paths:
                   example: "test@example.com"
       responses:
         200:
-          $ref: '#/components/responses/OK'
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  expiredAt:
+                    type: number
+                    example: 1732253873491
 
   /password/mail/check:
     post:
