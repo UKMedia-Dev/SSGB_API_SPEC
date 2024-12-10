@@ -527,6 +527,20 @@ paths:
                   boardId:
                     type: integer
                     example: 1
+    delete:
+      tags:
+        - 게시판
+      summary: 게시글 삭제
+      parameters:
+        - name: boardId
+          in: path
+          description: 상세 아이디
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          $ref: '#/components/responses/OK'
 
   /board/{boardId}/like:
     post:
