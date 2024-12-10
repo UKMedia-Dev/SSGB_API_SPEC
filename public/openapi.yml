@@ -1719,6 +1719,8 @@ components:
               example: 11
             bookmark:
               type: boolean
+            deleted:
+              type: boolean
         comments:
           $ref: '#/components/schemas/Comments'
     Comments:
@@ -1757,6 +1759,8 @@ components:
             example: 1
           like:
             type: boolean
+          deleted:
+            type: boolean
           comments:
             type: array
             items:
@@ -1792,6 +1796,8 @@ components:
                   type: integer
                   example: 1
                 like:
+                  type: boolean
+                deleted:
                   type: boolean
     BoardList:
       type: object
