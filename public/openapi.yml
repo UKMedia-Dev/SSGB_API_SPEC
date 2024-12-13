@@ -542,6 +542,21 @@ paths:
         200:
           $ref: '#/components/responses/OK'
 
+  /board/{boardId}/claim:
+    post:
+      tags:
+        - 게시판
+      summary: 게시글 신고 등록
+      parameters:
+        - name: boardId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          $ref: '#/components/responses/OK'
+
   /board/{boardId}/like:
     post:
       tags:
@@ -672,6 +687,21 @@ paths:
                   commentId:
                     type: integer
                     example: 5
+
+  /comment/{commentId}/claim:
+    post:
+      tags:
+        - 게시판
+      summary: 댓글 신고 등록
+      parameters:
+        - name: commentId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          $ref: '#/components/responses/OK'
 
   /comment/{commentId}/like:
     post:
