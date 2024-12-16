@@ -1,0 +1,59 @@
+openapi: 3.0.3
+info:
+  title: 소상톡톡 관리자 API
+  version: 0.0.1
+servers:
+  - url: https://sotalk.example.com/api/admin/v1
+tags:
+  - name: 회원가입
+  - name: 로그인
+  - name: 게시글 관리
+  - name: 컨텐츠 관리
+
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+            message:
+              type: string
+          required:
+            - code
+            - message
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  responses:
+    OK:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            type: object
+    Unauthorized:
+      description: 액세스 토큰이 비어 있거나 유효하지 않은 경우
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            value:
+              code: 401
+              message: unauthorized
+    Forbidden:
+      description: 권한이 없는 경우
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            value:
+              code: 403
+              message: forbidden
