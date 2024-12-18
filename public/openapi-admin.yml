@@ -211,8 +211,169 @@ paths:
         200:
           $ref: '#/components/responses/OK'
 
+  /event:
+    get:
+      tags:
+        - 컨텐츠 관리
+      summary: 베너/이벤트 목록
+      parameters:
+        - name: active
+          in: query
+          description: 사용 여부
+          required: false
+          schema:
+            type: boolean
+            example: false
+        - name: page
+          in: query
+          description: 현재 페이지
+          required: true
+          schema:
+            type: integer
+        - name: size
+          in: query
+          description: 페이지 당 표시 갯수
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              examples:
+                empty:
+                  value:
+                    totalCount: 0
+                    contents: [ ]
+                two:
+                  value:
+                    totalCount: 2
+                    contents:
+                      - eventId: 1
+                        title: "새로워진 업데이트 내용"
+                        eventTypeName: "팝업"
+                        startAt: "2024-11-19 12:00:00"
+                        endAt: "2024-11-25 22:00:00"
+                        duration: 72
+                        screenTypeName: "게시판(홈)"
+                        active: true
+                      - eventId: 2
+                        title: "소톡은 처음이신가요?"
+                        eventTypeName: "롤링배너"
+                        startAt: "2024-11-19 12:00:00"
+                        endAt: "2024-11-19 17:00:00"
+                        duration: 3
+                        screenTypeName: "마이페이지"
+                        active: false
+                many:
+                  value:
+                    totalCount: 5
+                    contents:
+                      - eventId: 1
+                        title: "새로워진 업데이트 내용"
+                        eventTypeName: "팝업"
+                        startAt: "2024-11-19 12:00:00"
+                        endAt: "2024-11-25 22:00:00"
+                        duration: 72
+                        screenTypeName: "게시판(홈)"
+                        active: true
+                      - eventId: 2
+                        title: "소톡은 처음이신가요?"
+                        eventTypeName: "롤링배너"
+                        startAt: "2024-11-19 12:00:00"
+                        endAt: "2024-11-19 17:00:00"
+                        duration: 3
+                        screenTypeName: "마이페이지"
+                        active: false
+                      - eventId: 3
+                        title: "소톡은 처음이신가요?"
+                        eventTypeName: "롤링배너"
+                        startAt: "2024-11-19 12:00:00"
+                        endAt: "2024-11-25 22:00:00"
+                        duration: 3
+                        screenTypeName: "게시판(홈)"
+                        active: false
+                      - eventId: 4
+                        title: "신규 생성된 멤버십제도 안내"
+                        eventTypeName: "롤링배너"
+                        startAt: "2024-11-19 12:00:00"
+                        endAt: "2024-11-19 17:00:00"
+                        duration: 3
+                        screenTypeName: "게시판(홈)"
+                        active: false
+                      - eventId: 5
+                        title: "신고 제재 관련 안내문"
+                        eventTypeName: "팝업"
+                        startAt: "2024-11-19 12:00:00"
+                        endAt: "2024-11-19 17:00:00"
+                        duration: 3
+                        screenTypeName: "메세지 목록"
+                        active: false
+    post:
+      tags:
+        - 컨텐츠 관리
+      summary: 베너/이벤트 등록
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: "소톡은 처음이지?"
+                screenType:
+                  $ref: '#/components/schemas/ScreenType'
+                eventType:
+                  $ref: '#/components/schemas/EventType'
+                always:
+                  type: boolean
+                  example: false
+                startAt:
+                  type: string
+                  example: "2024-11-19 12:00:00"
+                endAt:
+                  type: string
+                  example: "2024-11-20 23:59:59"
+                attachments:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+                active:
+                  type: boolean
+                  example: true
+                content:
+                  type: string
+                  example: 처음 이용하는 선생님들을 위해 소톡 앱소개와 이용법을 알려줄게!
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  eventId:
+                    type: integer
+                    example: 1
+
 components:
   schemas:
+    ScreenType:
+      type: string
+      enum:
+        - HOME
+        - MESSAGE
+        - MY_PAGE
+        - REGISTRATION
+    EventType:
+      type: string
+      enum:
+        - ROLLING
+        - POPUP
+        - GUIDE
     Error:
       type: object
       properties:
