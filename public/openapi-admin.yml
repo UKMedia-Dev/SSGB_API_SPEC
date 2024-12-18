@@ -10,6 +10,207 @@ tags:
   - name: 게시글 관리
   - name: 컨텐츠 관리
 
+paths:
+  /board/best:
+    get:
+      tags:
+        - 컨텐츠 관리
+      summary: 인기글 목록
+      parameters:
+        - name: pin
+          in: query
+          description: 고정게시글 여부
+          required: false
+          schema:
+            type: boolean
+            example: false
+        - name: page
+          in: query
+          description: 현재 페이지
+          required: true
+          schema:
+            type: integer
+        - name: size
+          in: query
+          description: 페이지 당 표시 갯수
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              examples:
+                empty:
+                  value:
+                    totalCount: 0
+                    bestSize: 5
+                    contents: [ ]
+                two:
+                  value:
+                    totalCount: 2
+                    bestSize: 5
+                    contents:
+                      - boardId: 1
+                        rank: 0
+                        title: "사업하는거 너무 힘드네요"
+                        boardTypeName: "소상톡톡"
+                        likesCount: 45
+                        viewCount: 1251
+                        commentsCount: 189
+                        claimCount: 0
+                        createdAt: "2024-11-19 18:45:00"
+                        nickname: "익명의소통"
+                        hidden: false
+                        pin: true
+                      - boardId: 2
+                        rank: 1
+                        title: "장사라는거 어떻게 시작하죠?"
+                        boardTypeName: "소상톡톡"
+                        likesCount: 43
+                        viewCount: 800
+                        commentsCount: 21
+                        claimCount: 0
+                        createdAt: "2024-11-19 18:45:00"
+                        nickname: "익명의소통"
+                        hidden: false
+                        pin: false
+                many:
+                  value:
+                    totalCount: 5
+                    bestSize: 5
+                    contents:
+                      - boardId: 1
+                        rank: 0
+                        title: "사업하는거 너무 힘드네요"
+                        boardTypeName: "소상톡톡"
+                        likesCount: 45
+                        viewCount: 1251
+                        commentsCount: 189
+                        claimCount: 0
+                        createdAt: "2024-11-19 18:45:00"
+                        nickname: "익명의소통"
+                        hidden: false
+                        pin: true
+                      - boardId: 2
+                        rank: 1
+                        title: "장사라는거 어떻게 시작하죠?"
+                        boardTypeName: "소상톡톡"
+                        likesCount: 43
+                        viewCount: 800
+                        commentsCount: 21
+                        claimCount: 0
+                        createdAt: "2024-11-19 18:45:00"
+                        nickname: "익명의소통"
+                        hidden: false
+                        pin: false
+                      - boardId: 3
+                        rank: 2
+                        title: "사업자 대출 진행 방법"
+                        boardTypeName: "사업톡톡"
+                        likesCount: 20
+                        viewCount: 502
+                        commentsCount: 13
+                        claimCount: 1
+                        createdAt: "2024-11-19 18:45:00"
+                        nickname: "익명의소통"
+                        hidden: false
+                        pin: false
+                      - boardId: 4
+                        rank: 3
+                        title: "사업하는거 너무 힘드네요"
+                        boardTypeName: "소상톡톡"
+                        likesCount: 15
+                        viewCount: 501
+                        commentsCount: 11
+                        claimCount: 2
+                        createdAt: "2024-11-19 18:45:00"
+                        nickname: "익명의소통"
+                        hidden: false
+                        pin: false
+                      - boardId: 5
+                        rank: 4
+                        title: "사업하는거 너무 힘드네요"
+                        boardTypeName: "소상톡톡"
+                        likesCount: 5
+                        viewCount: 51
+                        commentsCount: 5
+                        claimCount: 0
+                        createdAt: "2024-11-19 18:45:00"
+                        nickname: "익명의소통"
+                        hidden: false
+                        pin: false
+
+  /board/best/size:
+    get:
+      tags:
+        - 컨텐츠 관리
+      summary: 인기글 개수 설정 목록
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  bestConfigs:
+                    - bestSize: 3
+                      active: false
+                    - bestSize: 5
+                      active: false
+                    - bestSize: 10
+                      active: true
+                    - bestSize: 15
+                      active: false
+                    - bestSize: 20
+                      active: false
+    post:
+      tags:
+        - 컨텐츠 관리
+      summary: 인기글 개수 설정
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bestSize:
+                  type: integer
+                  example: 10
+      responses:
+        200:
+          $ref: '#/components/responses/OK'
+
+  /board/{boardId}/pin:
+    post:
+      tags:
+        - 컨텐츠 관리
+      summary: 고정 등록
+      parameters:
+        - name: boardId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          $ref: '#/components/responses/OK'
+    delete:
+      tags:
+        - 컨텐츠 관리
+      summary: 고정 해제
+      parameters:
+        - name: boardId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          $ref: '#/components/responses/OK'
+
 components:
   schemas:
     Error:
