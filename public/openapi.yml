@@ -1720,70 +1720,67 @@ components:
     BoardDetail:
       type: object
       properties:
-        board:
+        boardType:
+          type: string
+          example: "SOSANG"
+        boardTypeName:
+          type: string
+          example: "소상톡톡"
+        boardId:
+          type: integer
+          example: 1
+        author:
           type: object
           properties:
-            boardType:
+            nickname:
               type: string
-              example: "SOSANG"
-            boardTypeName:
-              type: string
-              example: "소상톡톡"
-            boardId:
+              example: "익명의소톡"
+            profileImageId:
               type: integer
-              example: 1
-            author:
-              type: object
-              properties:
-                nickname:
-                  type: string
-                  example: "익명의소톡"
-                profileImageId:
-                  type: integer
-                  example: 12
-                filePath:
-                  type: string
-                  example: "imageFileUrl.com"
-            createdAt:
+              example: 12
+            filePath:
               type: string
-              example: "2024-11-05 17:39:00"
-            title:
-              type: string
-              example: "K-Start up 에서 진행하는 지원 포탈"
-            content:
-              type: string
-              example: "우리 구에서는 저렴한 가격과 양질의..."
-            attachments:
-              type: array
-              items:
-                type: object
-                properties:
-                  fileName:
-                    type: string
-                    example: "착한가격업소_지원사업_소개.doc"
-                  fileId:
-                    type: integer
-                    example: 344
-                  filePath:
-                    type: string
-                    example: "https://www.naver.com"
-            likesCount:
-              type: integer
-              example: 11
-            like:
-              type: boolean
-            commentsCount:
-              type: integer
-              example: 2
-            viewCount:
-              type: integer
-              example: 11
-            bookmark:
-              type: boolean
-            deleted:
-              type: boolean
-            claim:
-              type: boolean
+              example: "imageFileUrl.com"
+        createdAt:
+          type: string
+          example: "2024-11-05 17:39:00"
+        title:
+          type: string
+          example: "K-Start up 에서 진행하는 지원 포탈"
+        content:
+          type: string
+          example: "우리 구에서는 저렴한 가격과 양질의..."
+        attachments:
+          type: array
+          items:
+            type: object
+            properties:
+              fileName:
+                type: string
+                example: "착한가격업소_지원사업_소개.doc"
+              fileId:
+                type: integer
+                example: 344
+              filePath:
+                type: string
+                example: "https://www.naver.com"
+        likesCount:
+          type: integer
+          example: 11
+        like:
+          type: boolean
+        commentsCount:
+          type: integer
+          example: 2
+        viewCount:
+          type: integer
+          example: 11
+        bookmark:
+          type: boolean
+        deleted:
+          type: boolean
+        claim:
+          type: boolean
         comments:
           $ref: '#/components/schemas/Comments'
     Comments:
