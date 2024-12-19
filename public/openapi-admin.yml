@@ -546,6 +546,95 @@ paths:
                     type: integer
                     example: 1
 
+  /event/{eventId}:
+    get:
+      tags:
+        - 컨텐츠 관리
+      summary: 베너/이벤트 상세
+      parameters:
+        - name: eventId
+          in: path
+          description: 베너/이벤트 아이디
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventDetail'
+    put:
+      tags:
+        - 컨텐츠 관리
+      summary: 베너/이벤트 수정
+      parameters:
+        - name: eventId
+          in: path
+          description: 베너/이벤트 아이디
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: "소톡은 처음이지?"
+                screenType:
+                  $ref: '#/components/schemas/ScreenType'
+                eventType:
+                  $ref: '#/components/schemas/EventType'
+                always:
+                  type: boolean
+                  example: false
+                startAt:
+                  type: string
+                  example: "2024-11-19 12:00:00"
+                endAt:
+                  type: string
+                  example: "2024-11-20 23:59:59"
+                attachments:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+                active:
+                  type: boolean
+                  example: true
+                content:
+                  type: string
+                  example: 처음 이용하는 선생님들을 위해 소톡 앱소개와 이용법을 알려줄게!
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  eventId:
+                    type: integer
+                    example: 1
+    delete:
+      tags:
+        - 컨텐츠 관리
+      summary: 베너/이벤트 삭제
+      parameters:
+        - name: eventId
+          in: path
+          description: 베너/이벤트 아이디
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          $ref: '#/components/responses/OK'
+
   /user/{userId}/info:
     get:
       tags:
@@ -806,6 +895,51 @@ components:
         lastLoggedIn:
           type: string
           example: "2024-11-07 15:44"
+
+    EventDetail:
+      type: object
+      properties:
+        title:
+          type: string
+          example: "'소톡'은 처음이지?"
+        screenType:
+          type: string
+          example: "HOME"
+        screenTypeName:
+          type: string
+          example: "게시판(홈)"
+        eventType:
+          type: string
+          example: "ROLLING"
+        eventTypeName:
+          type: string
+          example: "롤링배너"
+        startAt:
+          type: string
+          example: "2024-12-09 12:00:00"
+        endAt:
+          type: string
+          example: "2024-12-10 22:00:00"
+        active:
+          type: boolean
+          example: true
+        content:
+          type: string
+          example: "처음 이용하는 선생님들을 위해 소톡 앱소개와 이용법을 알려줄게!"
+        attachments:
+          type: array
+          items:
+            type: object
+            properties:
+              fileName:
+                type: string
+                example: "소톡은 처음이지.png"
+              fileId:
+                type: integer
+                example: 344
+              filePath:
+                type: string
+                example: "https://www.naver.com"
 
   securitySchemes:
     bearerAuth:
