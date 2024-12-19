@@ -16,6 +16,7 @@ paths:
     post:
       tags:
         - 회원가입
+      summary: 관리자 회원가입
       requestBody:
         content:
           application/json:
