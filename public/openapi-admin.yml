@@ -12,6 +12,157 @@ tags:
   - name: 기타
 
 paths:
+  /register/admin:
+    post:
+      tags:
+        - 회원가입
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: "test@example.com"
+                password:
+                  type: string
+                  example: "test1234!"
+                confirmPassword:
+                  type: string
+                  example: "test1234!"
+                agreedService:
+                  type: boolean
+      responses:
+        200:
+          $ref: '#/components/responses/OK'
+
+  /user:
+    get:
+      tags:
+        - 회원 관리
+      summary: 목록
+      parameters:
+        - name: page
+          in: query
+          description: 현재 페이지
+          required: true
+          schema:
+            type: integer
+        - name: size
+          in: query
+          description: 페이지 당 표시 갯수
+          required: true
+          schema:
+            type: integer
+        - name: approved
+          in: query
+          description: 승인 여부
+          schema:
+            type: boolean
+        - name: query
+          in: query
+          description: 검색어
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserList'
+
+    delete:
+      tags:
+        - 회원 관리
+      summary: 일괄 삭제
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userIds:
+                  type: array
+                  items:
+                    type: integer
+                    example: 1
+      responses:
+        200:
+          $ref: '#/components/responses/OK'
+
+  /user/approval:
+    patch:
+      tags:
+        - 회원 관리
+      summary: 일괄 승인
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userIds:
+                  type: array
+                  items:
+                    type: integer
+                    example: 1
+      responses:
+        200:
+          $ref: '#/components/responses/OK'
+
+
+  /user/{userId}:
+    get:
+      tags:
+        - 회원 관리
+      summary: 상세
+      parameters:
+        - name: userId
+          in: path
+          description: 상세 아이디
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDetail"
+    put:
+      tags:
+        - 회원 관리
+      summary: 수정
+      parameters:
+        - name: userId
+          in: path
+          description: 상세 아이디
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                approved:
+                  type: boolean
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userId:
+                    type: integer
+                    example: 1
+
   /board:
     get:
       tags:
@@ -182,7 +333,6 @@ paths:
                   boardId:
                     type: integer
                     example: 1
-
     delete:
       tags:
         - 게시글 관리
@@ -736,67 +886,64 @@ components:
     BoardDetail:
       type: object
       properties:
-        board:
+        boardType:
+          type: string
+          example: "SOSANG"
+        boardTypeName:
+          type: string
+          example: "소상톡톡"
+        boardId:
+          type: integer
+          example: 1
+        author:
           type: object
           properties:
-            boardType:
+            nickname:
               type: string
-              example: "SOSANG"
-            boardTypeName:
+              example: "익명의소톡"
+            profileImageId:
+              type: integer
+              example: 12
+            filePath:
               type: string
-              example: "소상톡톡"
-            boardId:
-              type: integer
-              example: 1
-            author:
-              type: object
-              properties:
-                nickname:
-                  type: string
-                  example: "익명의소톡"
-                profileImageId:
-                  type: integer
-                  example: 12
-                filePath:
-                  type: string
-                  example: "imageFileUrl.com"
-            createdAt:
-              type: string
-              example: "2024-11-05 17:39:00"
-            title:
-              type: string
-              example: "K-Start up 에서 진행하는 지원 포탈"
-            content:
-              type: string
-              example: "우리 구에서는 저렴한 가격과 양질의..."
-            attachments:
-              type: array
-              items:
-                type: object
-                properties:
-                  fileName:
-                    type: string
-                    example: "착한가격업소_지원사업_소개.doc"
-                  fileId:
-                    type: integer
-                    example: 344
-                  filePath:
-                    type: string
-                    example: "https://www.naver.com"
-            likesCount:
-              type: integer
-              example: 11
-            commentsCount:
-              type: integer
-              example: 2
-            viewCount:
-              type: integer
-              example: 11
-            claimCount:
-              type: integer
-              example: 15
-            deleted:
-              type: boolean
+              example: "imageFileUrl.com"
+        createdAt:
+          type: string
+          example: "2024-11-05 17:39:00"
+        title:
+          type: string
+          example: "K-Start up 에서 진행하는 지원 포탈"
+        content:
+          type: string
+          example: "우리 구에서는 저렴한 가격과 양질의..."
+        attachments:
+          type: array
+          items:
+            type: object
+            properties:
+              fileName:
+                type: string
+                example: "착한가격업소_지원사업_소개.doc"
+              fileId:
+                type: integer
+                example: 344
+              filePath:
+                type: string
+                example: "https://www.naver.com"
+        likesCount:
+          type: integer
+          example: 11
+        commentsCount:
+          type: integer
+          example: 2
+        viewCount:
+          type: integer
+          example: 11
+        claimCount:
+          type: integer
+          example: 15
+        deleted:
+          type: boolean
         comments:
           $ref: '#/components/schemas/Comments'
     Comments:
@@ -895,6 +1042,90 @@ components:
         lastLoggedIn:
           type: string
           example: "2024-11-07 15:44"
+    UserList:
+      type: object
+      properties:
+        totalCount:
+          type: integer
+          example: 1
+        contents:
+          type: array
+          items:
+            type: object
+            properties:
+              userId:
+                type: integer
+                example: 1
+              email:
+                type: string
+                example: "test@test.com"
+              provider:
+                $ref: "#/components/schemas/Provider"
+              title:
+                type: string
+                example: "사업하는거 너무 힘드네요"
+              content:
+                type: string
+                example: "사업 다들 어떻게 하시나요?"
+              createdAt:
+                type: string
+                example: "2024-11-07 10:42:00"
+              existsBusinessFile:
+                type: boolean
+                example: true
+              role:
+                $ref: "#/components/schemas/Role"
+              businessTypeName:
+                type: string
+                example: "외식업"
+              regionName:
+                type: string
+                example: "서울"
+              approved:
+                type: boolean
+                example: true
+    UserDetail:
+      type: object
+      properties:
+        email:
+          type: string
+          example: "test@example.com"
+        provider:
+          $ref: "#/components/schemas/Provider"
+        role:
+          $ref: "#/components/schemas/Role"
+        businessTypeName:
+          type: string
+          example: "외식업"
+        regionName:
+          type: string
+          example: "서울"
+        createdAt:
+          type: string
+          description: 가입일
+          example: "2024-11-07 15:44"
+        approved:
+          type: boolean
+        businessRegistration:
+          type: object
+          properties:
+            filePath:
+              type: string
+              example: "https://www.business.file.com"
+            fileName:
+              type: string
+              example: "사업장등록증_두리온.pdf"
+
+    Provider:
+      type: string
+      enum:
+        - KAKAO
+        - EMAIL
+    Role:
+      type: string
+      enum:
+        - USER
+        - ADMIN
 
     EventDetail:
       type: object
