@@ -504,7 +504,7 @@ paths:
                       active: false
                     - bestSize: 20
                       active: false
-    post:
+    put:
       tags:
         - 컨텐츠 관리
       summary: 인기글 개수 설정
