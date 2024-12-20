@@ -480,7 +480,7 @@ paths:
                         hidden: false
                         pin: false
 
-  /board/best/size:
+  /board/best/config:
     get:
       tags:
         - 컨텐츠 관리
