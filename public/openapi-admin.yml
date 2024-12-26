@@ -1228,8 +1228,8 @@ components:
               email:
                 type: string
                 example: "test@test.com"
-              loginType:
-                $ref: "#/components/schemas/LoginType"
+              loginTypeName:
+                $ref: "#/components/schemas/LoginTypeName"
               createdAt:
                 type: string
                 example: "2024-11-07 10:42:00"
@@ -1237,7 +1237,7 @@ components:
                 type: boolean
                 example: true
               role:
-                $ref: "#/components/schemas/Role"
+                $ref: "#/components/schemas/RoleDisplayName"
               businessTypeName:
                 type: string
                 example: "외식업"
@@ -1254,10 +1254,10 @@ components:
         email:
           type: string
           example: "test@example.com"
-        loginType:
-          $ref: "#/components/schemas/LoginType"
+        loginTypeName:
+          $ref: "#/components/schemas/LoginTypeName"
         role:
-          $ref: "#/components/schemas/Role"
+          $ref: "#/components/schemas/RoleDisplayName"
         businessTypeName:
           type: string
           example: "외식업"
@@ -1280,17 +1280,22 @@ components:
               type: string
               example: "사업장등록증_두리온.pdf"
 
-    LoginType:
+    LoginTypeName:
       type: string
       enum:
-        - KAKAO
-        - EMAIL
+        - "카카오"
+        - "이몌일"
 
     Role:
       type: string
       enum:
         - USER
         - ADMIN
+    RoleDisplayName:
+      type: string
+      enum:
+        - "앱사용자"
+        - "관리자"
 
     EventDetail:
       type: object
