@@ -218,14 +218,14 @@ paths:
       tags:
         - 게시글 관리
       summary: 게시글 등록
+      description: |
+        boardType 은 "SAUP"으로 고정되어 보낼 필요 없습니다.
       requestBody:
         content:
           multipart/form-data:
             schema:
               type: object
               properties:
-                boardType:
-                  $ref: '#/components/schemas/BoardType'
                 title:
                   type: string
                   example: "정부 사업 정리..."
@@ -306,8 +306,6 @@ paths:
             schema:
               type: object
               properties:
-                boardType:
-                  $ref: '#/components/schemas/BoardType'
                 title:
                   type: string
                   example: "익명의 소톡 모여라~"
