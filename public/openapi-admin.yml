@@ -1207,7 +1207,7 @@ components:
           type: string
           description: 가입일
           example: "2024-11-07 15:44"
-        lastLoggedIn:
+        lastLoginAt:
           type: string
           example: "2024-11-07 15:44"
 
