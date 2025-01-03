@@ -10,6 +10,7 @@ tags:
   - name: 게시글 관리
   - name: 컨텐츠 관리
   - name: 기타
+  - name: 콤보
 
 paths:
   /register/admin:
@@ -705,6 +706,7 @@ paths:
                       - eventId: 1
                         title: "새로워진 업데이트 내용"
                         eventTypeName: "팝업"
+                        always: false
                         startAt: "2024-11-19 12:00:00"
                         endAt: "2024-11-25 22:00:00"
                         duration: 72
@@ -712,6 +714,7 @@ paths:
                         active: true
                       - eventId: 2
                         title: "소톡은 처음이신가요?"
+                        always: false
                         eventTypeName: "롤링배너"
                         startAt: "2024-11-19 12:00:00"
                         endAt: "2024-11-19 17:00:00"
@@ -725,6 +728,7 @@ paths:
                       - eventId: 1
                         title: "새로워진 업데이트 내용"
                         eventTypeName: "팝업"
+                        always: false
                         startAt: "2024-11-19 12:00:00"
                         endAt: "2024-11-25 22:00:00"
                         duration: 72
@@ -733,6 +737,7 @@ paths:
                       - eventId: 2
                         title: "소톡은 처음이신가요?"
                         eventTypeName: "롤링배너"
+                        always: false
                         startAt: "2024-11-19 12:00:00"
                         endAt: "2024-11-19 17:00:00"
                         duration: 3
@@ -741,24 +746,27 @@ paths:
                       - eventId: 3
                         title: "소톡은 처음이신가요?"
                         eventTypeName: "롤링배너"
-                        startAt: "2024-11-19 12:00:00"
-                        endAt: "2024-11-25 22:00:00"
+                        always: true
+                        startAt: "0001-01-01 00:00:00"
+                        endAt: "2099-01-01 01:00:00"
                         duration: 3
                         screenTypeName: "게시판(홈)"
                         active: false
                       - eventId: 4
                         title: "신규 생성된 멤버십제도 안내"
                         eventTypeName: "롤링배너"
-                        startAt: "2024-11-19 12:00:00"
-                        endAt: "2024-11-19 17:00:00"
+                        always: true
+                        startAt: "0001-01-01 00:00:00"
+                        endAt: "2099-01-01 01:00:00"
                         duration: 3
                         screenTypeName: "게시판(홈)"
                         active: false
                       - eventId: 5
                         title: "신고 제재 관련 안내문"
                         eventTypeName: "팝업"
-                        startAt: "2024-11-19 12:00:00"
-                        endAt: "2024-11-19 17:00:00"
+                        always: true
+                        startAt: "0001-01-01 00:00:00"
+                        endAt: "2099-01-01 01:00:00"
                         duration: 3
                         screenTypeName: "메세지 목록"
                         active: false
@@ -779,6 +787,8 @@ paths:
                   $ref: '#/components/schemas/ScreenType'
                 eventType:
                   $ref: '#/components/schemas/EventType'
+                link:
+                  example: https://www.naver.com
                 always:
                   type: boolean
                   example: false
@@ -854,6 +864,9 @@ paths:
                   $ref: '#/components/schemas/ScreenType'
                 eventType:
                   $ref: '#/components/schemas/EventType'
+                link:
+                  type: string
+                  example: https://www.naver.com
                 always:
                   type: boolean
                   example: false
@@ -868,6 +881,10 @@ paths:
                   items:
                     type: string
                     format: binary
+                deleteFileIds:
+                  type: array
+                  items:
+                    type: integer
                 active:
                   type: boolean
                   example: true
@@ -919,6 +936,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+
+  /combo/screenType:
+    get:
+      tags:
+        - 콤보
+      summary: 베너/이벤트 노출화면 목록 콤보
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  screenTypes:
+                    - screenType: HOME
+                      screenTypeName: 게시판(홈)
+                    - screenType: MESSAGE
+                      screenTypeName: 메세지 목록
+                    - screenType: MY_PAGE
+                      screenTypeName: 마이페이지 목록
+                    - screenType: REGISTRATION
+                      screenTypeName: 회원가입
+
+  /combo/eventType:
+    get:
+      tags:
+        - 콤보
+      summary: 베너/이벤트 종류 목록 콤보
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  eventTypes:
+                    - eventType: ROLLING
+                      eventTypeName: 롤링배너
+                    - eventType: POPUP
+                      eventTypeName: 팝업
+                    - eventType: GUIDE
+                      eventTypeName: 가이드
 
 components:
   schemas:
@@ -1312,15 +1373,9 @@ components:
         screenType:
           type: string
           example: "HOME"
-        screenTypeName:
-          type: string
-          example: "게시판(홈)"
         eventType:
           type: string
           example: "ROLLING"
-        eventTypeName:
-          type: string
-          example: "롤링배너"
         startAt:
           type: string
           example: "2024-12-09 12:00:00"
