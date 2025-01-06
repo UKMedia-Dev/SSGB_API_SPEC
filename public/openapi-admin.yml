@@ -64,9 +64,13 @@ paths:
             type: boolean
         - name: query
           in: query
-          description: 검색어
           schema:
             type: string
+          description: |
+            검색어
+            - 이메일
+            - 사업 종류
+            - 지역
       responses:
         200:
           description: OK
@@ -174,7 +178,6 @@ paths:
         - name: boardType
           in: query
           description: 게시판 구분
-          required: true
           schema:
             $ref: '#/components/schemas/BoardType'
         - name: page
@@ -208,6 +211,16 @@ paths:
             - view
             - like
             - createdAt
+        - name: query
+          in: query
+          schema:
+            type: string
+          description: |
+            검색어
+            - 제목
+            - 내용
+            - 닉네임
+
       responses:
         200:
           description: OK
@@ -586,9 +599,12 @@ paths:
             type: boolean
         - name: query
           in: query
-          description: 검색어
           schema:
             type: string
+          description: |
+            검색어
+            - 내용
+            - 닉네임
       responses:
         200:
           description: OK
