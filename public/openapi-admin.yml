@@ -967,7 +967,7 @@ paths:
                 type: object
                 example:
                   screenTypes:
-                    - screenType: HOME
+                    - screenType: BOARD
                       screenTypeName: 게시판(홈)
                     - screenType: MESSAGE
                       screenTypeName: 메세지 목록
@@ -1002,7 +1002,7 @@ components:
     ScreenType:
       type: string
       enum:
-        - HOME
+        - BOARD
         - MESSAGE
         - MY_PAGE
         - REGISTRATION
@@ -1388,7 +1388,7 @@ components:
           example: "'소톡'은 처음이지?"
         screenType:
           type: string
-          example: "HOME"
+          example: "BOARD"
         eventType:
           type: string
           example: "ROLLING"
