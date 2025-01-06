@@ -1741,6 +1741,9 @@ components:
             filePath:
               type: string
               example: "imageFileUrl.com"
+            userId:
+              type: integer
+              example: 1
         createdAt:
           type: string
           example: "2024-11-05 17:39:00"
@@ -1794,6 +1797,9 @@ components:
           nickname:
             type: string
             example: "익명의 소톡"
+          userId:
+            type: integer
+            example: 1
           createdAt:
             type: string
             example: "2024-11-05 17:39:00"
