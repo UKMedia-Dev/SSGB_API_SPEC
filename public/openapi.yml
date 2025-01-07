@@ -858,12 +858,19 @@ paths:
                       profileImageId: 21
                       filePath: "imageFileUrl.com"
 
-  /board/event:
+  /event:
     get:
       tags:
-        - 게시판
-      summary: 이벤트 광고 목록
+        - 기타
+      summary: 배너/이벤트 목록
       security: [ ]
+      parameters:
+        - name: screenType
+          in: query
+          description: 배너/이벤트 표시 화면 구분
+          required: true
+          schema:
+            $ref: '#/components/schemas/ScreenType'
       responses:
         200:
           description: OK
@@ -872,25 +879,66 @@ paths:
               example:
                 totalCount: 5
                 contents:
-                  - eventType: "TEXT"
-                    link: "https://www.naver.com/"
-                    title: "'소톡'은 처음이지?1"
-                    content: "이벤트 내용을 입력해주세요. 이벤트 내용을 입력해주세요. 이벤트 내용을 입력해주세요."
-                  - eventType: "IMAGE"
-                    link: "https://www.naver.com/"
-                    filePath: "imageFileUrl.com"
-                  - eventType: "TEXT"
-                    link: "https://www.naver.com/"
-                    title: "'소톡'은 처음이지?2"
-                    content: "이벤트 내용을 입력해주세요. 이벤트 내용을 입력해주세요. 이벤트 내용을 입력해주세요."
-                  - eventType: "IMAGE"
-                    link: "https://www.naver.com/"
-                    filePath: "imageFileUrl.com"
-                  - eventType: "TEXT"
-                    link: "https://www.naver.com/"
-                    title: "'소톡'은 처음이지?3"
-                    content: "이벤트 내용을 입력해주세요. 이벤트 내용을 입력해주세요. 이벤트 내용을 입력해주세요."
-
+                  - eventId: 10
+                    eventType: GUIDE
+                    link: https://naver.com
+                    title: 제목10
+                    content: 내용10
+                    attachments:
+                      - fileId: 100
+                        fileName: "가이드1.pdf"
+                        filePath: https://www.naver.com
+                      - fileId: 101
+                        fileName: "가이드2.jpg"
+                        filePath: https://www.naver.com
+                  - eventId: 9
+                    eventType: ROLLING
+                    link: https://naver.com
+                    title: 제목9
+                    content: 내용9
+                    attachments:
+                      - fileId: 99
+                        fileName: "롤링베너.pdf"
+                        filePath: https://www.naver.com
+                  - eventId: 8
+                    eventType: ROLLING
+                    link: https://naver.com
+                    title: 제목8
+                    content: 내용8
+                    attachments:
+                      - fileId: 88
+                        fileName: "롤링베너2.pdf"
+                        filePath: https://www.naver.com
+                  - eventId: 7
+                    eventType: POPUP
+                    link: https://naver.com
+                    title: 팝업 제목
+                    content: 팝업 내용
+                    attachments:
+                      - fileId: 77
+                        fileName: "팝업 이미지.pdf"
+                        filePath: https://www.naver.com
+                  - eventId: 6
+                    eventType: POPUP
+                    link: https://naver.com
+                    title: 팝업 공지 제목
+                    content: 팝업 공지 내용
+                    attachments:
+                      - fileId: 66
+                        fileName: 공지.pdf"
+                        filePath: https://www.naver.com
+                  - eventId: 5
+                    eventType: GUIDE
+                    link: https://naver.com
+                    title: 제목5
+                    content: 내용5
+                    attachments:
+                      - fileId: 55
+                        fileName: "가이드1.pdf"
+                        filePath: https://www.naver.com
+                      - fileId: 44
+                        fileName: "가이드2.jpg"
+                        filePath: https://www.naver.com
   /chatRoom:
     get:
       tags:
@@ -1931,6 +1979,13 @@ components:
       enum:
         - REGION
         - TOPIC
+    ScreenType:
+      type: string
+      enum:
+        - BOARD
+        - MESSAGE
+        - MY_PAGE
+        - REGISTRATION
     ChatRoomList:
       type: array
       items:
