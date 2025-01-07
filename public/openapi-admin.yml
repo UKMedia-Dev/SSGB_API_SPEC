@@ -1139,6 +1139,8 @@ components:
           example: 15
         deleted:
           type: boolean
+        deletedBy:
+          $ref: '#/components/schemas/DeletedBy'
         comments:
           $ref: '#/components/schemas/Comments'
     Comments:
@@ -1149,6 +1151,9 @@ components:
           commentId:
             type: integer
             example: 1
+          parentCommentId:
+            type: integer
+            example: 15
           nickname:
             type: string
             example: "익명의 소톡"
@@ -1180,8 +1185,11 @@ components:
             example: 1
           deleted:
             type: boolean
-          claim:
-            type: boolean
+          deletedBy:
+            $ref: '#/components/schemas/DeletedBy'
+          claimCount:
+            type: integer
+            example: 20
           comments:
             type: array
             items:
@@ -1190,6 +1198,9 @@ components:
                 commentId:
                   type: integer
                   example: 1
+                parentCommentId:
+                  type: integer
+                  example: 15
                 nickname:
                   type: string
                   example: "익명의 소톡"
@@ -1218,6 +1229,11 @@ components:
                   example: 1
                 deleted:
                   type: boolean
+                deletedBy:
+                  $ref: '#/components/schemas/DeletedBy'
+                claimCount:
+                  type: integer
+                  example: 20
 
     CommentList:
       type: array
