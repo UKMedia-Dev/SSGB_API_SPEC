@@ -1255,7 +1255,34 @@ components:
                   type: integer
                   example: 21
                 deletedBy:
-                  $ref: "#/components/schemas/Role"
+                  $ref: "#/components/schemas/DeletedBy"
+                comments:
+                  type: object
+                  properties:
+                    commentId:
+                      type: integer
+                      example: 5
+                    parentCommentId:
+                      type: integer
+                      example: 1
+                    nickname:
+                      type: string
+                      example: "글쓴사람 닉네임"
+                    createdAt:
+                      type: string
+                      example: "2024-11-05 17:39:00"
+                    content:
+                      type: string
+                      example: "먼데 나도 알려줘"
+                    deleted:
+                      type: boolean
+                    hidden:
+                      type: boolean
+                    claimCount:
+                      type: integer
+                      example: 21
+                    deletedBy:
+                      $ref: "#/components/schemas/DeletedBy"
                 board:
                   type: object
                   properties:
@@ -1379,6 +1406,11 @@ components:
       enum:
         - "앱사용자"
         - "관리자"
+    DeletedBy:
+      type: string
+      enum:
+        - "작성자 삭제"
+        - "관리자 삭제"
 
     EventDetail:
       type: object
