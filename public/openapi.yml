@@ -969,6 +969,8 @@ paths:
                           filePath: "imageFileUrl.com"
                         lastChat: "이전 대화 내용이 들어갑니다."
                         createdAt: "2024-11-07 10:42:00"
+                        userId: 1
+                        otherUserId: 15
                 many:
                   value:
                     totalCount: 5
@@ -982,6 +984,8 @@ paths:
                           filePath: "imageFileUrl.com"
                         lastChat: "이전 대화 내용이 들어갑니다."
                         createdAt: "2024-11-07 10:42:00"
+                        userId: 1
+                        otherUserId: 15
                       - chatRoomId: 2
                         chatRoomName: "익명의 소톡이"
                         sender:
@@ -991,6 +995,8 @@ paths:
                           filePath: "imageFileUrl.com"
                         lastChat: "이전 대화 내용이 들어갑니다."
                         createdAt: "2024-11-05 10:42:00"
+                        userId: 1
+                        otherUserId: 15
                       - chatRoomId: 3
                         chatRoomName: "익명의 소톡이"
                         sender:
@@ -1000,6 +1006,8 @@ paths:
                           filePath: "imageFileUrl.com"
                         lastChat: "이전 대화 내용이 들어갑니다."
                         createdAt: "2024-11-05 10:42:00"
+                        userId: 1
+                        otherUserId: 15
                       - chatRoomId: 4
                         chatRoomName: "익명의 소톡이"
                         sender:
@@ -1009,6 +1017,8 @@ paths:
                           filePath: "imageFileUrl.com"
                         lastChat: "이전 대화 내용이 들어갑니다."
                         createdAt: "2024-11-05 10:42:00"
+                        userId: 1
+                        otherUserId: 15
                       - chatRoomId: 5
                         chatRoomName: "익명의 소톡이"
                         sender:
@@ -1018,6 +1028,8 @@ paths:
                           filePath: "imageFileUrl.com"
                         lastChat: "이전 대화 내용이 들어갑니다."
                         createdAt: "2024-11-05 10:42:00"
+                        userId: 1
+                        otherUserId: 15
     post:
       tags:
         - 메시지
@@ -2018,6 +2030,12 @@ components:
           createdAt:
             type: string
             example: "2024-11-07 10:42:00"
+          userId:
+            type: integer
+            example: 1
+          otherUserId:
+            type: integer
+            example: 15
     ChatRoomDetail:
       type: object
       properties:
