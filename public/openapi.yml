@@ -2088,6 +2088,9 @@ components:
     User:
       type: object
       properties:
+        userId:
+          type: integer
+          example: 1
         nickname:
           type: string
           example: 가난한 토깽이
